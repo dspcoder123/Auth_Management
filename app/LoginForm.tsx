@@ -18,7 +18,7 @@ export default function LoginForm() {
     setLoading(true);
     try {
       const res = await axios.post(
-        "http://localhost:4000/api/auth/login",
+        "https://backend-gydk.onrender.com/api/auth/login",
         form
       );
       toast.success(res.data.toastMessage || "Login successful!");
@@ -35,7 +35,7 @@ export default function LoginForm() {
     setLoading(true);
     try {
       const res = await axios.post(
-        "http://localhost:4000/api/auth/google-login",
+        "https://backend-gydk.onrender.com/api/auth/google-login",
         {
           idToken: credentialResponse.credential,
         }

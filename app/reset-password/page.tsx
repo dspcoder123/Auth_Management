@@ -24,7 +24,7 @@ export default function ResetPasswordPage() {
     }
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:4000/api/auth/reset-password', { token, password });
+      const res = await axios.post('https://backend-gydk.onrender.com/api/auth/reset-password', { token, password });
       toast.success(res.data.toastMessage || 'Password reset successful');
 
       // Clear fields

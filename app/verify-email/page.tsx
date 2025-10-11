@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 // Prevent Next.js from pre-rendering this page
 export const dynamic = 'force-dynamic';
 
-export default function VerifyEmailPage() {
+function VerifyEmailContent() {
   const searchParams = useSearchParams();
   const token = searchParams.get('token');
   const [verified, setVerified] = useState(false);
@@ -17,7 +17,7 @@ export default function VerifyEmailPage() {
     async function verify() {
       if (!token) return;
       try {
-        const res = await axios.get(`http://localhost:4000/api/auth/verify-email?token=${token}`);
+        const res = await axios.get(`https://backend-gydk.onrender.com/api/auth/verify-email?token=${token}`);
         toast(res.data.toastMessage || 'Email verified', { type: 'success' });
         setVerified(true);
       } catch (err: any) {
@@ -35,5 +35,13 @@ export default function VerifyEmailPage() {
         : <div>Verifying...</div>
       }
     </div>
+  );
+}
+
+export default function VerifyEmailPage() {
+  return (
+    <Suspense fallback={<div style={{ maxWidth: 350, margin: '2rem auto' }}>Loading...</div>}>
+      <VerifyEmailContent />
+    </Suspense>
   );
 }
