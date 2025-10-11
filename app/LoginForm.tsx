@@ -5,9 +5,10 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { GoogleLogin } from "@react-oauth/google";
 import { useRouter } from 'next/navigation';
-const router = useRouter();
+
 
 export default function LoginForm() {
+  const router = useRouter();
   const [form, setForm] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
 
