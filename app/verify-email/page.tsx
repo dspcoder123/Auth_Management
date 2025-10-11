@@ -5,7 +5,8 @@ import { useSearchParams } from 'next/navigation';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-export const dynamic = 'force-dynamic'; // <-- Add this
+// Prevent Next.js from pre-rendering this page
+export const dynamic = 'force-dynamic';
 
 export default function VerifyEmailPage() {
   const searchParams = useSearchParams();
