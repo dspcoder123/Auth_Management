@@ -1,0 +1,134 @@
+.profile-page {
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  background-color: #f5f6fa;
+}
+
+/* Header */
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 2rem;
+  background-color: #3f51b5;
+  color: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.logo {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.header-tabs {
+  display: flex;
+  gap: 1rem;
+}
+
+.tab-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.tab-btn:hover {
+  background-color: rgba(255,255,255,0.2);
+}
+
+.tab-btn.active {
+  background-color: rgba(255,255,255,0.35);
+}
+
+.profile-menu {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+}
+
+.avatar-icon {
+  width: 36px;
+  height: 36px;
+}
+
+.username {
+  font-weight: 500;
+}
+
+.logout-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.logout-btn:hover {
+  color: #ffcccb;
+}
+
+/* Main content */
+.profile-content {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.welcome-msg {
+  text-align: center;
+}
+
+.profile-card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.profile-header-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.avatar-lg {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+  border: 2px solid #3f51b5;
+}
+
+.profile-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+  font-size: 14px;
+  color: #555;
+}
+
+/* Loading */
+.loading {
+  text-align: center;
+  margin: 2rem auto;
+  font-size: 16px;
+  color: #3f51b5;
+}

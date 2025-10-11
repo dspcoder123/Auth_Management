@@ -1,0 +1,82 @@
+/* General page styling */
+.home-container {
+  background-color: #f4f6fa;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Box for auth section */
+.auth-box {
+  background: #ffffff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+/* Title */
+.title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 24px;
+}
+
+.highlight {
+  color: #3f51b5;
+}
+
+/* Buttons */
+.button-group {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.toggle-btn {
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #ccc;
+  padding: 10px 20px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.toggle-btn:first-child {
+  border-radius: 8px 0 0 8px;
+}
+
+.toggle-btn:last-child {
+  border-radius: 0 8px 8px 0;
+  border-left: none;
+}
+
+.toggle-btn:hover {
+  background-color: #e6e6e6;
+}
+
+.toggle-btn.active {
+  background-color: #3f51b5;
+  color: white;
+  border-color: #3f51b5;
+}
+
+/* Form section */
+.form-container {
+  margin-top: 10px;
+}
+
+/* Footer */
+.footer {
+  margin-top: 20px;
+  color: #777;
+  font-size: 13px;
+  text-align: center;
+}

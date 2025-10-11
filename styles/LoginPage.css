@@ -1,0 +1,85 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 10px;
+  animation: fadeIn 0.4s ease;
+}
+
+/* Input fields */
+.login-form input {
+  padding: 12px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: 0.2s;
+}
+
+.login-form input:focus {
+  border-color: #3f51b5;
+  box-shadow: 0 0 4px rgba(63, 81, 181, 0.3);
+}
+
+/* Submit button */
+.login-form button {
+  padding: 12px;
+  background-color: #3f51b5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-form button:hover {
+  background-color: #3546a2;
+}
+
+.login-form button:disabled {
+  background-color: #9fa8da;
+  cursor: not-allowed;
+}
+
+/* Divider */
+.divider {
+  text-align: center;
+  color: #777;
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+/* Google login button */
+.google-login {
+  display: flex;
+  justify-content: center;
+}
+
+/* Forgot Password link */
+.forgot-password {
+  text-align: center;
+}
+
+.forgot-password a {
+  font-size: 14px;
+  color: #3f51b5;
+  text-decoration: none;
+}
+
+.forgot-password a:hover {
+  text-decoration: underline;
+}
+
+/* Optional fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
