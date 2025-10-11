@@ -5,6 +5,8 @@ import { useSearchParams } from 'next/navigation';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
+export const dynamic = 'force-dynamic'; // <-- Add this
+
 export default function VerifyEmailPage() {
   const searchParams = useSearchParams();
   const token = searchParams.get('token');
