@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Removed static export for proper deployment
+  // Fix lockfile warning
+  outputFileTracingRoot: undefined,
+  // Ensure proper deployment
+  trailingSlash: false,
 }
 module.exports = nextConfig;
