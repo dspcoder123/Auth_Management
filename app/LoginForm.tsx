@@ -4,6 +4,8 @@ import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { GoogleLogin } from "@react-oauth/google";
+import { useRouter } from 'next/navigation';
+const router = useRouter();
 
 export default function LoginForm() {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -42,7 +44,7 @@ export default function LoginForm() {
       );
       toast.success(res.data.toastMessage || "Google login successful!");
       if (res.data.token) localStorage.setItem("authToken", res.data.token);
-      setTimeout(() => (window.location.href = "/home"), 1000);
+      setTimeout(() => router.push('/home'), 1000);
     } catch {
       toast.error("Google login failed");
     } finally {
