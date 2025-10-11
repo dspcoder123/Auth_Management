@@ -42,7 +42,7 @@ export default function LoginForm() {
       );
       toast.success(res.data.toastMessage || "Google login successful!");
       if (res.data.token) localStorage.setItem("authToken", res.data.token);
-      setTimeout(() => (window.location.href = "/profile"), 1000);
+      setTimeout(() => (window.location.href = "/home"), 1000);
     } catch {
       toast.error("Google login failed");
     } finally {
