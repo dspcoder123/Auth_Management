@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FiLogOut, FiUser } from 'react-icons/fi';
 import '../../styles/ProfilePage.css';
+import Header from '../../components/Header'; // Strapi header
+import HomeHero from '../../components/HomeHero'; // Strapi hero
 
 export default function ProfilePage() {
   const [user, setUser] = useState<any>(null);
@@ -38,39 +40,41 @@ export default function ProfilePage() {
 
   return (
     <div className="profile-page">
-      {/* Header */}
-      <header className="profile-header">
-        <div className="logo">Auth System</div>
-
-        <nav className="header-tabs">
-          <button
-            className={`tab-btn ${activeTab === 'home' ? 'active' : ''}`}
-            onClick={() => setActiveTab('home')}
-          >
-            Home
-          </button>
-          <button
-            className={`tab-btn ${activeTab === 'profile' ? 'active' : ''}`}
-            onClick={() => setActiveTab('profile')}
-          >
-            My Profile
-          </button>
-        </nav>
-
-        <div className="profile-menu">
+      {/* Strapi header always at top */}
+      <Header
+        user={user}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        onProfile={() => setActiveTab('profile')}
+        onLogout={handleLogout} />
+      {/* Strapi hero always at top */}
+      <HomeHero />
+      {/* Tab navigation and user menu area */}
+      <nav className="header-tabs">
+        <button
+          className={`tab-btn ${activeTab === 'home' ? 'active' : ''}`}
+          onClick={() => setActiveTab('home')}
+        >
+          Home
+        </button>
+        <button
+          className={`tab-btn ${activeTab === 'profile' ? 'active' : ''}`}
+          onClick={() => setActiveTab('profile')}
+        >
+          My Profile
+        </button>
+        <div className="profile-menu" style={{ display: 'inline-flex', alignItems: 'center', marginLeft: 16 }}>
           {user.profilePic ? (
             <img src={user.profilePic} alt="User" className="avatar" />
           ) : (
             <FiUser className="avatar-icon" />
           )}
-          <span className="username">{user.name.split(' ')[0]}</span>
-          <button className="logout-btn" onClick={handleLogout}>
+          <span className="username" style={{ marginLeft: 8 }}>{user.name.split(' ')[0]}</span>
+          <button className="logout-btn" style={{ marginLeft: 12 }} onClick={handleLogout}>
             <FiLogOut />
           </button>
         </div>
-      </header>
-
-      {/* Main content */}
+      </nav>
       <main className="profile-content">
         {activeTab === 'home' && (
           <div className="welcome-msg">
@@ -78,7 +82,6 @@ export default function ProfilePage() {
             <p>Use the header tabs to see your profile or logout.</p>
           </div>
         )}
-
         {activeTab === 'profile' && (
           <div className="profile-card">
             <div className="profile-header-card">
