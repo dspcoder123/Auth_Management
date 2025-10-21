@@ -11,51 +11,46 @@ export default function PageTracker() {
   const { i18n } = useTranslation();
 
   const trackPageView = (path: string, language: string) => {
-    // Add language as query parameter to the path
-    const pathWithLanguage = path.includes('?') 
+    const pathWithLanguage = path.includes('?')
       ? `${path}&lang=${language}`
       : `${path}?lang=${language}`;
-    
+
     const trackingData = {
       path: pathWithLanguage,
-      language: language,
-      timestamp: new Date().toISOString()
+      language,
+      timestamp: new Date().toISOString(),
     };
-    
-    // Track page view with language in path
-    fetch(`https://backend-gydk.onrender.com/api/track`, {
+
+    fetch('https://backend-gydk.onrender.com/api/track', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(trackingData),
-      credentials: 'omit'
+      credentials: 'omit',
     }).catch(() => {}); // Silent fail
   };
 
   useEffect(() => {
-    const path = pathname + (searchParams.toString() ? `?${searchParams.toString()}` : '');
+    const paramsString = searchParams?.toString() ?? '';
+    const path = pathname + (paramsString ? `?${paramsString}` : '');
     const language = i18n.language || 'en';
-    
+
     trackPageView(path, language);
   }, [pathname, searchParams, i18n.language]);
 
-  // Listen for language change events
   useEffect(() => {
     const handleLanguageChange = (event: CustomEvent) => {
-      const path = pathname + (searchParams.toString() ? `?${searchParams.toString()}` : '');
+      const paramsString = searchParams?.toString() ?? '';
+      const path = pathname + (paramsString ? `?${paramsString}` : '');
       const language = event.detail.language;
-      
-      // Track language change with current path
+
       trackPageView(path, language);
     };
 
     window.addEventListener('languageChanged', handleLanguageChange as EventListener);
-    
     return () => {
       window.removeEventListener('languageChanged', handleLanguageChange as EventListener);
     };
   }, [pathname, searchParams]);
 
-  return null; // This component renders nothing
+  return null; // Component renders nothing
 }
