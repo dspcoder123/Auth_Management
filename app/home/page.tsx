@@ -7,15 +7,15 @@ interface HomePageProps {
   user: any;
 }
 
-export default function HomePage({ user }: HomePageProps) {
+export default function HomePage() {
   const handleLogout = () => {
     localStorage.removeItem('authToken');
-    window.location.href = '/';  // change to your actual login page path
+    window.location.href = '/';
   };
 
   return (
     <>
-      <Header user={user} onLogout={handleLogout} />
+      <Header user={null} onLogout={handleLogout} />
       <HomeHero />
       {/* Any other home content */}
     </>
