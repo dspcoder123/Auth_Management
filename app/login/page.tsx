@@ -21,7 +21,7 @@ export default function LoginForm() {
     setLoading(true);
     try {
       const res = await axios.post(
-        "https://backend-gydk.onrender.com/api/auth/login",
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/login`,
         form
       );
       toast.success(res.data.toastMessage || "Login successful!");
@@ -40,7 +40,7 @@ export default function LoginForm() {
     setLoading(true);
     try {
       const res = await axios.post(
-        "https://backend-gydk.onrender.com/api/auth/google-login",
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/google-login`,
         {
           idToken: credentialResponse.credential,
         }

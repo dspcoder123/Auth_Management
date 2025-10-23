@@ -17,7 +17,7 @@ export default function RegisterForm() {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post('https://backend-gydk.onrender.com/api/auth/register', form);
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/register`, form);
       toast.success(res.data.toastMessage || 'Registration successful!');
       setForm({ name: '', email: '', mobile: '', password: '' });
     } catch (err: any) {
@@ -30,7 +30,7 @@ export default function RegisterForm() {
   const handleGoogleRegister = async (credentialResponse: any) => {
     setLoading(true);
     try {
-      const res = await axios.post('https://backend-gydk.onrender.com/api/auth/google-auth', {
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/google-auth`, {
         idToken: credentialResponse.credential,
       });
       toast.success(res.data.toastMessage || 'Google registration successful!');

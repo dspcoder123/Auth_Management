@@ -15,7 +15,7 @@ export default function ForgotPasswordPage() {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post('https://backend-gydk.onrender.com/api/auth/forgot-password', { email });
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/forgot-password`, { email });
       toast.success(res.data.toastMessage || 'Password reset initiated');
 
       // Clear form

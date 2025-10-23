@@ -21,7 +21,7 @@ export default function PageTracker() {
       timestamp: new Date().toISOString(),
     };
 
-    fetch('https://backend-gydk.onrender.com/api/track', {
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/track`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(trackingData),

@@ -17,7 +17,7 @@ function VerifyEmailContent() {
     async function verify() {
       if (!token) return;
       try {
-        const res = await axios.get(`https://backend-gydk.onrender.com/api/auth/verify-email?token=${token}`);
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/verify-email?token=${token}`);
         toast(res.data.toastMessage || 'Email verified', { type: 'success' });
         setVerified(true);
       } catch (err: any) {

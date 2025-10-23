@@ -17,7 +17,7 @@ export default function ProfilePage() {
         return;
       }
       try {
-        const res = await axios.get('https://backend-gydk.onrender.com/api/auth/profile', {
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/profile`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setUser(res.data.user);

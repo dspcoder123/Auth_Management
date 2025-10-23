@@ -74,7 +74,7 @@ export default function Header({
       const token = auth.getToken();
       if (!token) return;
       try {
-        const res = await fetch('https://backend-gydk.onrender.com/api/auth/profile', {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/profile`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!res.ok) {
