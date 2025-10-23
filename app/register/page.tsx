@@ -1,10 +1,9 @@
-'use client';
-
+"use client";
 import { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { GoogleLogin } from '@react-oauth/google';
-import '../styles/RegisterForm.css'; // 👈 Import the CSS file
+import '../../styles/RegisterForm.css';
 
 export default function RegisterForm() {
   const [form, setForm] = useState({ name: '', email: '', mobile: '', password: '' });
@@ -37,8 +36,7 @@ export default function RegisterForm() {
       toast.success(res.data.toastMessage || 'Google registration successful!');
       setTimeout(() => {
         window.location.href = '/';
-      }, 3000);
-
+      }, 2000);
     } catch {
       toast.error('Google registration failed');
     } finally {
@@ -47,53 +45,53 @@ export default function RegisterForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="register-form">
-      <input
-        type="text"
-        name="name"
-        value={form.name}
-        onChange={handleChange}
-        placeholder="Full Name"
-        required
-      />
-      <input
-        type="email"
-        name="email"
-        value={form.email}
-        onChange={handleChange}
-        placeholder="Email"
-        required
-      />
-      <input
-        type="tel"
-        name="mobile"
-        value={form.mobile}
-        onChange={handleChange}
-        placeholder="Mobile Number"
-        required
-      />
-      <input
-        type="password"
-        name="password"
-        value={form.password}
-        onChange={handleChange}
-        placeholder="Password"
-        required
-      />
-
-      <button type="submit" disabled={loading}>
-        {loading ? 'Registering...' : 'Register'}
-      </button>
-
-      <div className="divider">or</div>
-
-      <div className="google-login">
-        <GoogleLogin
-          onSuccess={handleGoogleRegister}
-          onError={() => toast.error('Google login failed')}
-
+    <div className="register-page-background">
+      <form onSubmit={handleSubmit} className="register-form">
+        <h2 className="register-title">Create an Account</h2>
+        <p className="register-description">Join MultiLang to unlock full features and stay connected.</p>
+        <input
+          type="text"
+          name="name"
+          value={form.name}
+          onChange={handleChange}
+          placeholder="Full Name"
+          required
         />
-      </div>
-    </form>
+        <input
+          type="email"
+          name="email"
+          value={form.email}
+          onChange={handleChange}
+          placeholder="Email"
+          required
+        />
+        <input
+          type="tel"
+          name="mobile"
+          value={form.mobile}
+          onChange={handleChange}
+          placeholder="Mobile Number"
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          value={form.password}
+          onChange={handleChange}
+          placeholder="Password"
+          required
+        />
+        <button type="submit" disabled={loading}>
+          {loading ? 'Registering...' : 'Register'}
+        </button>
+        <div className="divider">or</div>
+        <div className="google-login">
+          <GoogleLogin
+            onSuccess={handleGoogleRegister}
+            onError={() => toast.error('Google registration failed')}
+          />
+        </div>
+      </form>
+    </div>
   );
 }

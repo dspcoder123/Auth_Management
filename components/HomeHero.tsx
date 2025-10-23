@@ -28,6 +28,8 @@ export default function HomeHero() {
   const [imageUrl, setImageUrl] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userName, setUserName] = useState<string | null>(null);
 
   const baseUrl = useMemo(() => process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337', []);
 
@@ -85,6 +87,43 @@ export default function HomeHero() {
     fetchHero();
     return () => { cancelled = true; };
   }, [i18n.language, baseUrl]);
+
+  // detect auth state from localStorage (prefer cached user)
+  useEffect(() => {
+    try {
+      const cached = typeof window !== 'undefined' ? localStorage.getItem('authUser') : null;
+      if (cached) {
+        const u = JSON.parse(cached);
+        setIsLoggedIn(true);
+        setUserName(u?.name || null);
+        return;
+      }
+    } catch (e) {
+      // ignore
+    }
+    const token = typeof window !== 'undefined' ? localStorage.getItem('authToken') : null;
+    if (token) setIsLoggedIn(true);
+    else setIsLoggedIn(false);
+  }, []);
+
+  useEffect(() => {
+    const onAuthUpdate = (e: Event) => {
+      try {
+        const data = (e as CustomEvent).detail;
+        if (data?.loggedIn === false) {
+          setIsLoggedIn(false);
+          setUserName(null);
+        } else if (data?.user) {
+          setIsLoggedIn(true);
+          setUserName(data.user?.name || null);
+        }
+      } catch (err) {
+        // ignore
+      }
+    };
+    window.addEventListener('auth:update', onAuthUpdate as EventListener);
+    return () => window.removeEventListener('auth:update', onAuthUpdate as EventListener);
+  }, []);
 
   return (
     <section
@@ -144,6 +183,56 @@ export default function HomeHero() {
           {error ? (
             <p style={{ color: 'crimson', marginTop: 12 }}>{error}</p>
           ) : null}
+
+          {/* Conditional CTAs based on auth state */}
+          <div style={{ marginTop: 20 }}>
+            {!isLoggedIn ? (
+              <>
+                <p style={{ color: '#555', marginTop: 12 }}>
+                  Want to learn more? Click read more to see full details.
+                </p>
+                <a
+                  href="/login"
+                  style={{
+                    display: 'inline-block',
+                    marginTop: 12,
+                    padding: '10px 18px',
+                    borderRadius: 8,
+                    background: '#1e81f6',
+                    color: '#fff',
+                    textDecoration: 'none',
+                    fontWeight: 600,
+                  }}
+                >
+                  Read more
+                </a>
+              </>
+            ) : (
+              <>
+                <p style={{ color: '#111827', marginTop: 12, fontWeight: 600 }}>
+                  Welcome back{userName ? `, ${userName.split(' ')[0]}` : ''}! Here's more content just for you.
+                </p>
+                <p style={{ color: '#4b5563', marginTop: 8 }}>
+                  {description || 'Explore your personalized dashboard and features.'}
+                </p>
+                <a
+                  href="/profile"
+                  style={{
+                    display: 'inline-block',
+                    marginTop: 12,
+                    padding: '10px 18px',
+                    borderRadius: 8,
+                    border: '1px solid #1e81f6',
+                    color: '#1e81f6',
+                    textDecoration: 'none',
+                    fontWeight: 600,
+                  }}
+                >
+                  Go to Profile
+                </a>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </section>

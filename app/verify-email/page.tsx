@@ -10,7 +10,7 @@ export const dynamic = 'force-dynamic';
 
 function VerifyEmailContent() {
   const searchParams = useSearchParams();
-  const token = searchParams.get('token');
+  const token = searchParams ? searchParams.get('token') : null;
   const [verified, setVerified] = useState(false);
 
   useEffect(() => {

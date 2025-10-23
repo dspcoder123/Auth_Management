@@ -1,70 +1,100 @@
+/* Page background */
+.register-page-background {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(120deg, #f8fafc 0%, #e0e7ff 100%);
+}
+
+/* Card style form container */
 .register-form {
+  width: 370px;
+  background: #fff;
+  box-shadow: 0 4px 24px rgba(30,60,80,0.11);
+  border-radius: 18px;
+  padding: 34px 28px 24px 28px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  margin-top: 10px;
+  gap: 18px;
+  margin-top: 0;
+  animation: fadeIn 0.4s ease;
+}
+
+.register-title {
+  margin-bottom: 4px;
+  font-size: 25px;
+  font-weight: 700;
+  color: #343457;
+  text-align: center;
+}
+
+.register-description {
+  font-size: 15px;
+  color: #5f609c;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 /* Input fields */
 .register-form input {
-  padding: 12px;
-  font-size: 15px;
-  border: 1px solid #ccc;
+  padding: 13px;
+  font-size: 16px;
+  border: 1px solid #b2bad0;
   border-radius: 8px;
   outline: none;
   transition: 0.2s;
+  background-color: #f8f9fd;
 }
 
 .register-form input:focus {
-  border-color: #3f51b5;
-  box-shadow: 0 0 4px rgba(63, 81, 181, 0.3);
+  border-color: #1e81f6;
+  box-shadow: 0 0 5px rgba(30,129,246,0.14);
 }
 
 /* Submit button */
-.register-form button {
-  padding: 12px;
-  background-color: #3f51b5;
+.register-form button[type="submit"] {
+  padding: 13px;
+  background-image: linear-gradient(90deg, #3f51b5 60%, #1e81f6 100%);
   color: white;
   border: none;
   border-radius: 8px;
   font-weight: 600;
   font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  margin-top: 6px;
+  transition: background 0.3s, filter 0.3s;
 }
 
-.register-form button:hover {
-  background-color: #3546a2;
+.register-form button[type="submit"]:hover {
+  filter: brightness(0.93);
 }
 
 .register-form button:disabled {
-  background-color: #9fa8da;
+  background: #c1c4d6;
   cursor: not-allowed;
 }
 
 /* Divider */
 .divider {
   text-align: center;
-  color: #777;
-  margin: 10px 0;
-  font-size: 14px;
+  color: #7979af;
+  margin: 12px 0 7px 0;
+  font-size: 15px;
+  letter-spacing: 0.5px;
 }
 
-/* Google login button */
 .google-login {
   display: flex;
   justify-content: center;
+  margin-bottom: 5px;
 }
 
 /* Optional: subtle fade-in animation */
-.register-form {
-  animation: fadeIn 0.4s ease;
-}
-
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(13px);
   }
   to {
     opacity: 1;
