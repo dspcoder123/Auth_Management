@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import I18nProvider from '../components/I18nProvider';
 import PageTracker from '../components/PageTracker';
+import Header from '../components/Header';
 import Script from 'next/script';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <GoogleOAuthProvider clientId="55940499103-kcti4g9ainlt5korcheq00heqqnabvt8.apps.googleusercontent.com">
           <I18nProvider>
+            <Header />
             {children}
             <PageTracker />
           </I18nProvider>

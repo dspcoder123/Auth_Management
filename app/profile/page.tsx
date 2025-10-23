@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import auth from '../../lib/auth';
 import { FiUser } from 'react-icons/fi';
-import Header from '../../components/Header'; // Adjust path as needed
 import '../../styles/ProfilePage.css'; // You can create or extend your CSS here
 
 export default function ProfilePage() {
@@ -31,33 +31,29 @@ export default function ProfilePage() {
 
   if (!user) return <div className="loading">Loading...</div>;
 
-  // You need to pass user and onLogout handler to Header
   const handleLogout = () => {
-    localStorage.removeItem('authToken');
+    auth.clearAuth();
     window.location.href = '/login';
   };
 
   return (
-    <>
-      <Header user={user} onLogout={handleLogout} />
-      <div className="profile-page-container">
-        <div className="profile-card">
-          <div className="profile-header-card">
-            {user.profilePic ? (
-              <img src={user.profilePic} alt="User" className="avatar-lg" />
-            ) : (
-              <FiUser className="avatar-lg" />
-            )}
-            <h2>{user.name}</h2>
-            <p>{user.email}</p>
-          </div>
-          <div className="profile-details-grid">
-            <div><strong>Mobile:</strong> {user.mobile || 'N/A'}</div>
-            <div><strong>Status:</strong> {user.verified ? 'Verified' : 'Not Verified'}</div>
-            <div><strong>Created:</strong> {user.createdAt ? new Date(user.createdAt).toLocaleString() : ''}</div>
-          </div>
+    <div className="profile-page-container">
+      <div className="profile-card">
+        <div className="profile-header-card">
+          {user.profilePic ? (
+            <img src={user.profilePic} alt="User" className="avatar-lg" />
+          ) : (
+            <FiUser className="avatar-lg" />
+          )}
+          <h2>{user.name}</h2>
+          <p>{user.email}</p>
+        </div>
+        <div className="profile-details-grid">
+          <div><strong>Mobile:</strong> {user.mobile || 'N/A'}</div>
+          <div><strong>Status:</strong> {user.verified ? 'Verified' : 'Not Verified'}</div>
+          <div><strong>Created:</strong> {user.createdAt ? new Date(user.createdAt).toLocaleString() : ''}</div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

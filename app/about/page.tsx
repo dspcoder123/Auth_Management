@@ -1,6 +1,5 @@
 'use client';
 
-import Header from '../../components/Header'; // adjust path if needed
 import { useState } from 'react';
 
 export default function AboutPage() {
@@ -10,14 +9,8 @@ export default function AboutPage() {
     profilePic: '',
   });
 
-  const handleLogout = () => {
-    localStorage.removeItem('authToken');
-    window.location.href = '/login';
-  };
-
   return (
     <>
-      <Header user={user} onLogout={handleLogout}  />
       <main style={styles.main}>
         <section style={{
           display: 'flex',
