@@ -1,16 +1,14 @@
 'use client';
 
 import '../styles/HomePage.css';
-import HomeContent from '../components/HomeContent';
+import Hero from '../components/Hero';
+// import '../styles/globals.css';
 
 export default function HomePage() {
   return (
     <div className="home-container">
-      <HomeContent />
+      <Hero isDark={true} />
 
-      <footer className="footer">
-        © {new Date().getFullYear()} Auth System by Dinesh
-      </footer>
     </div>
   );
 }

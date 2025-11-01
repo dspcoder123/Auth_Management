@@ -2,6 +2,7 @@
 'use client';
 import './globals.css';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import I18nProvider from '../components/I18nProvider';
@@ -33,7 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <GoogleOAuthProvider clientId="55940499103-kcti4g9ainlt5korcheq00heqqnabvt8.apps.googleusercontent.com">
           <I18nProvider>
-            <Header />
+            <Header/>
             {children}
             <PageTracker />
           </I18nProvider>
