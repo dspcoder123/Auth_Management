@@ -172,7 +172,7 @@ export default function Header({
               margin: 0, padding: 0, gap: 24
             }}>
               <li><a href="/" style={{ color: '#1e81f6', fontWeight: 600, fontSize: 16 }}>{homeLabel}</a></li>
-              <li><a href="/about" style={{ color: '#666', textDecoration: 'none', fontSize: 15 }}>{aboutLabel}</a></li>
+              <li><a href="/" style={{ color: '#666', textDecoration: 'none', fontSize: 15 }}>{aboutLabel}</a></li>
               <li><a href="#services" style={{ color: '#666', textDecoration: 'none', fontSize: 15 }}>{servicesLabel}</a></li>
               <li><a href="#portfolio" style={{ color: '#666', textDecoration: 'none', fontSize: 15 }}>{portfolioLabel}</a></li>
               <li><a href="#blog" style={{ color: '#666', textDecoration: 'none', fontSize: 15 }}>{blogLabel}</a></li>
