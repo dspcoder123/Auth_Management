@@ -1,77 +1,108 @@
-/* Page background */
-.login-page-background {
+/* Background for theme */
+body[data-theme="dark"] .login-page-background {
+  /* background: radial-gradient(circle at 52% 50%, #181236 70%, #0a0721 100%); */
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(120deg, #f8fafc 0%, #e0e7ff 100%);
 }
 
-/* Card style form container */
-.login-form {
-  width: 370px;
-  background: #fff;
-  box-shadow: 0 4px 24px rgba(30,60,80,0.10);
+body[data-theme="light"] .login-page-background {
+  background: radial-gradient(circle at 52% 50%, #f8fafc 70%, #e0e7ff 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Card-style form container */
+body[data-theme="dark"] .login-form {
+  width: 410px;
+  padding: 46px 32px 34px 32px;
+  background: #1c2242;
+  color: #eaeaea;
+  box-shadow: 0 8px 32px rgba(45,90,225,0.13);
   border-radius: 18px;
-  padding: 34px 28px 22px 28px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  margin-top: 0;
+  gap: 19px;
   animation: fadeIn 0.4s ease;
+  margin-top: 40px;
+}
+
+body[data-theme="light"] .login-form {
+  width: 410px;
+  padding: 46px 32px 34px 32px;
+  background: #fff;
+  color: #181236;
+  box-shadow: 0 4px 24px rgba(30,60,80,0.11);
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 19px;
+  animation: fadeIn 0.4s ease;
+  margin-top: 40px;
 }
 
 .login-title {
-  margin-bottom: 4px;
-  font-size: 26px;
+  font-size: 1.52rem;
   font-weight: 700;
-  color: #32324d;
-  text-align: center;
+  color: #fff;
+  margin-bottom: 4px;
+  text-align: left;
 }
-
+body[data-theme="light"] .login-title {
+  color: #20215b;
+}
 .login-description {
-  font-size: 15px;
-  color: #63648b;
-  text-align: center;
-  margin-bottom: 9px;
+  color: #a3aed6;
+  font-size: 1.05rem;
+  margin-bottom: 15px;
+  text-align: left;
 }
 
 /* Input fields */
-.login-form input {
+.login-form input[type="email"], .login-form input[type="password"] {
   padding: 13px;
-  font-size: 16px;
-  border: 1px solid #c3cad9;
+  font-size: 1rem;
+  border: 1.5px solid #293057;
   border-radius: 8px;
   outline: none;
-  transition: 0.2s;
-  background-color: #f8f9fd;
+  transition: border 0.22s, box-shadow 0.22s;
+  background-color: #141947;
+  color: #ededf5;
+  margin-bottom: 7px;
 }
-
+body[data-theme="light"] .login-form input[type="email"],
+body[data-theme="light"] .login-form input[type="password"] {
+  background-color: #f8f9fd;
+  color: #181236;
+  border: 1.5px solid #c3cad9;
+}
 .login-form input:focus {
   border-color: #1e81f6;
-  box-shadow: 0 0 5px rgba(30,129,246,0.15);
+  box-shadow: 0 0 5px #1e81f677;
 }
 
 /* Submit button */
 .login-form button[type="submit"] {
-  padding: 13px;
-  background-image: linear-gradient(90deg, #3f51b5 60%, #1e81f6 100%);
+  background-image: linear-gradient(90deg, #3666f8 60%, #1e81f6 100%);
   color: white;
   border: none;
   border-radius: 8px;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 17px;
   cursor: pointer;
-  margin-top: 6px;
+  margin-top: 10px;
+  padding: 13px;
+  box-shadow: 0 2px 12px rgba(30,60,80,0.08);
   transition: background 0.3s, filter 0.3s;
 }
-
 .login-form button[type="submit"]:hover {
-  filter: brightness(0.93);
+  filter: brightness(0.94);
 }
-
 .login-form button:disabled {
-  background: #c1c4d6;
+  background: #626787;
   cursor: not-allowed;
 }
 
@@ -79,33 +110,39 @@
 .divider {
   text-align: center;
   color: #7c7bae;
-  margin: 12px 0 7px 0;
   font-size: 15px;
   letter-spacing: 0.5px;
+  margin: 18px 0 11px 0;
+}
+body[data-theme="light"] .divider {
+  color: #6b7280;
 }
 
+/* Google login */
 .google-login {
   display: flex;
   justify-content: center;
-  margin-bottom: 7px;
+  margin-bottom: 3px;
 }
 
 /* Forgot Password link */
 .forgot-password {
   text-align: center;
+  margin-top: 1px;
 }
-
 .forgot-password a {
   font-size: 14px;
-  color: #2660f6;
   text-decoration: none;
+  color: #80a6ff;
+  transition: color 0.15s;
 }
-
+body[data-theme="light"] .forgot-password a {
+  color: #2660f6;
+}
 .forgot-password a:hover {
   text-decoration: underline;
 }
 
-/* Optional fade-in animation */
 @keyframes fadeIn {
   from {
     opacity: 0;

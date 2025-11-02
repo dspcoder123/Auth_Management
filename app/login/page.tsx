@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { GoogleLogin } from "@react-oauth/google";
 import { useRouter } from 'next/navigation';
 import auth from '../../lib/auth'; // Your existing auth lib
+import Footer from "@/components/Footer/Footer";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -58,6 +59,7 @@ export default function LoginForm() {
   };
 
   return (
+    <>
     <div className="login-page-background">
       <form onSubmit={handleSubmit} className="login-form">
         <h2 className="login-title">Welcome Back</h2>
@@ -96,5 +98,7 @@ export default function LoginForm() {
         </div>
       </form>
     </div>
+    <Footer isDark = {true}/>
+    </>
   );
 }
