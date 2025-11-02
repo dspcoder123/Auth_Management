@@ -1,0 +1,117 @@
+.blog-section {
+    padding: 64px 16px;
+    color: white;
+  }
+  .blog-section__header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .blog-section__latest {
+    color: #45a6ff;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 1.1rem;
+  }
+  .blog-section__title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin: 12px 0;
+  }
+  .blog-section__desc {
+    color: #b5b5b7;
+    font-size: 1.1rem;
+    margin: 0 auto;
+    max-width: 600px;
+  }
+  
+  .blog-section__cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  @media (min-width: 700px) {
+    .blog-section__cards {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (min-width: 1050px) {
+    .blog-section__cards {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+  
+  body[data-theme="light"] .blog-card  {
+    background-color: #e4e4e4;
+    color: black;
+    font-size: 20px;
+  }
+
+  body[data-theme="light"] .blog-card__meta{
+    color: #000;
+  }
+
+  body[data-theme="light"] .blog-card__desc{
+    color: #000;
+    font-size: 16px;
+  }
+  
+  .blog-card {
+    background: #181236;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    transition: transform 0.18s, box-shadow 0.18s;
+  }
+  .blog-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 12px 38px rgba(45,90,225,0.14);
+  }
+  .blog-card__image img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+  }
+  .blog-card__content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 24px;
+  }
+  .blog-card__meta {
+    color: #b5b5b7;
+    font-size: 0.98rem;
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .blog-card__title {
+    font-size: 1.28rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+  }
+  .blog-card__desc {
+    color: #e0e0e0;
+    flex: 1;
+    margin-bottom: 16px;
+  }
+  .blog-card__btn {
+    align-self: flex-start;
+    background: #fff;
+    color: #181236;
+    font-weight: 700;
+    font-size: 1.06rem;
+    padding: 10px 26px;
+    border-radius: 28px;
+    text-decoration: none;
+    transition: background 0.18s, color 0.18s;
+  }
+  .blog-card__btn:hover {
+    background: #fafafa;
+    color: #121212;
+  }
+
+  

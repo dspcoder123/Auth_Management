@@ -1,0 +1,112 @@
+body[data-theme="dark"] .testimonials-section {
+    background: #0a0721;
+    color: #fff;
+  }
+  body[data-theme="light"] .testimonials-section {
+    background: #f5f7fb;
+    color: #181236;
+  }
+  
+  .testimonials-section {
+    padding: 64px 18px 64px 18px;
+  }
+  
+  .testimonials-section__header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .testimonials-section__subtitle {
+    color: #45a6ff;
+    font-weight: bold;
+    font-size: 1.05rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .testimonials-section__title {
+    font-size: 2.3rem;
+    font-weight: 800;
+    margin: 15px 0 8px 0;
+  }
+  .testimonials-section__desc {
+    color: #b5b5b7;
+    font-size: 1.1rem;
+    margin: 0 auto;
+    max-width: 600px;
+  }
+  
+  /* Testimonial cards grid */
+  .testimonials-section__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  @media (min-width: 900px) {
+    .testimonials-section__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  /* Card styling */
+  .testimonial-card {
+    background: #1b2178;
+    border-radius: 16px;
+    padding: 30px 28px 22px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-shadow: 0 8px 32px rgba(45,90,225,0.10);
+  }
+  body[data-theme="light"] .testimonial-card {
+    background: #fff;
+    color: #181236;
+  }
+  
+  /* Person info */
+  .testimonial-card__person {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 3px;
+  }
+  .testimonial-card__avatar {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 12px;
+    background: #bcbcbc;
+  }
+  .testimonial-card__name {
+    font-weight: bold;
+    font-size: 1.05rem;
+  }
+  .testimonial-card__title {
+    font-size: 0.96rem;
+    color: #b5b5b7;
+  }
+  
+  body[data-theme="light"] .testimonial-card__title {
+    color: #7281a6;
+  }
+  
+  /* Testimonial text */
+  .testimonial-card__body {
+    font-size: 1rem;
+    line-height: 20px;
+    color: #eaeaea;
+    font-weight: 400;
+  }
+  body[data-theme="light"] .testimonial-card__body {
+    color: #222;
+  }
+  
+  @media (max-width: 700px) {
+    .testimonials-section__title {
+      font-size: 1.33rem;
+    }
+    .testimonial-card {
+      padding: 18px 8px 12px 8px;
+    }
+  }
+  

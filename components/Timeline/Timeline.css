@@ -1,0 +1,182 @@
+body[data-theme="dark"] .timeline-section {
+    background: #0a0721;
+    color: #fff;
+  }
+  body[data-theme="light"] .timeline-section {
+    background: #f5f7fb;
+    color: #181236;
+  }
+  
+  .timeline-section {
+    padding: 64px 18px 100px 18px;
+  }
+  
+  .timeline-section__header {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+  .timeline-section__subtitle {
+    color: #45a6ff;
+    font-weight: bold;
+    font-size: 1.05rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .timeline-section__title {
+    font-size: 2.3rem;
+    font-weight: 800;
+    margin: 16px 0 8px 0;
+  }
+  .timeline-section__desc {
+    color: #b5b5b7;
+    font-size: 1.1rem;
+    margin: 0 auto;
+    max-width: 600px;
+  }
+  
+  /* Track layout */
+  .timeline-section__track {
+    position: relative;
+    width: 100%;
+    max-width: 850px;
+    margin: 0 auto;
+    padding-top: 20px;
+  }
+  .timeline-section__line {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 4px;
+    height: 100%;
+    background: #282e54;
+    transform: translateX(-50%);
+    z-index: 1;
+  }
+  
+  .timeline-section__cards {
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* vertical space between cards */
+    position: relative;
+    z-index: 2;
+  }
+  
+  /* Card alternation */
+  .timeline-card {
+    width: 420px;
+    position: relative;
+    background: transparent;
+    z-index: 2;
+    display: flex;
+    align-items: flex-start;
+  }
+  .timeline-card--left {
+    margin-right: auto;
+    margin-left: 0;
+    text-align: left;
+    justify-content: flex-start;
+  }
+  .timeline-card--right {
+    margin-left: auto;
+    margin-right: 0;
+    text-align: left;
+    justify-content: flex-end;
+  }
+  
+  .timeline-card__content {
+    background: #181a36;
+    border-radius: 14px;
+    box-shadow: 0 6px 24px rgba(45,90,225,0.11);
+    padding: 42px 22px;
+    position: relative;
+    width: 100%;
+  }
+
+  /* For left cards: pushes card content away from the line */
+.timeline-card--left .timeline-card__content {
+    margin-right: 12px;
+  }
+  
+  /* For right cards: pushes card content away from the line */
+  .timeline-card--right .timeline-card__content {
+    margin-left: 12px;
+  }
+  
+  body[data-theme="light"] .timeline-card__content {
+    background: #fff;
+    color: #181236;
+  }
+  
+  .timeline-card__date {
+    font-weight: 700;
+    color: #fff;
+    font-size: 1.05rem;
+    margin-bottom: 8px;
+  }
+  body[data-theme="light"] .timeline-card__date {
+    color: #181236;
+  }
+  .timeline-card__desc {
+    color: #b5b5b7;
+    font-size: 1rem;
+    margin-bottom: 16px;
+  }
+  body[data-theme="light"] .timeline-card__desc {
+    color: #5b5b70;
+  }
+  .timeline-card__badge {
+    display: inline-block;
+    background: #232b52;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.97rem;
+    border-radius: 16px;
+    padding: 4px 14px;
+    margin-top: 6px;
+  }
+  .timeline-card__badge span { color: #90e883; font-weight: 800; margin-left: 7px; }
+  body[data-theme="light"] .timeline-card__badge {
+    background: #181236;
+    color: #fff;
+  }
+  .timeline-card__dot {
+    position: absolute;
+    top: 38px;
+    width: 16px;
+    height: 16px;
+    background: #45a6ff;
+    border-radius: 50%;
+    border: 4px solid #181a36;
+    z-index: 3;
+    left: 99%;
+    transform: translate(-50%, -50%);
+  }
+  .timeline-card--left .timeline-card__dot {
+    left: 102.5%;
+  }
+  .timeline-card--right .timeline-card__dot {
+    left: -2.5%;
+  }
+  
+  @media (max-width: 920px) {
+    .timeline-card {
+      width: 98vw;
+    }
+    .timeline-section__cards {
+      gap: 40px;
+    }
+    .timeline-section__line {
+      left: 14px;
+      width: 3px;
+      height: 100%;
+      transform: none;
+      display: none;
+    }
+    .timeline-card__dot {
+      display: none;
+    }
+    .timeline-card--left, .timeline-card--right {
+      margin: 0 auto;
+    }
+  }
+  

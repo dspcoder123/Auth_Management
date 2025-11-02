@@ -43,27 +43,27 @@ const FeatureIcon = ({ icon }: { icon: string }) => {
   switch (icon) {
     case "shield":
       return (
-        <svg width="38" height="38" viewBox="0 0 38 38" fill="none"><circle cx="19" cy="19" r="19" fill="#3e7dff"/><path d="M19 11l6 3v4.5c0 4.2-2.902 8.026-6 9-3.098-0.974-6-4.8-6-9V14l6-3z" fill="#fff"/></svg>
+        <svg width="60" height="60" viewBox="0 0 38 38" fill="none"><circle cx="19" cy="19" r="19" fill="#3e7dff"/><path d="M19 11l6 3v4.5c0 4.2-2.902 8.026-6 9-3.098-0.974-6-4.8-6-9V14l6-3z" fill="#fff"/></svg>
       );
     case "gift":
       return (
-        <svg width="38" height="38" viewBox="0 0 38 38" fill="none"><circle cx="19" cy="19" r="19" fill="#3e7dff"/><rect x="12" y="16" width="14" height="10" rx="2" fill="#fff"/><rect x="16" y="12" width="6" height="4" rx="2" fill="#fff"/></svg>
+        <svg width="60" height="60" viewBox="0 0 38 38" fill="none"><circle cx="19" cy="19" r="19" fill="#3e7dff"/><rect x="12" y="16" width="14" height="10" rx="2" fill="#fff"/><rect x="16" y="12" width="6" height="4" rx="2" fill="#fff"/></svg>
       );
     case "upload":
       return (
-        <svg width="38" height="38" viewBox="0 0 38 38" fill="none"><circle cx="19" cy="19" r="19" fill="#3e7dff"/><polygon points="19,13 25,20 13,20" fill="#fff"/></svg>
+        <svg width="60" height="60" viewBox="0 0 38 38" fill="none"><circle cx="19" cy="19" r="19" fill="#3e7dff"/><polygon points="19,13 25,20 13,20" fill="#fff"/></svg>
       );
     case "database":
       return (
-        <svg width="38" height="38" viewBox="0 0 38 38" fill="none"><circle cx="19" cy="19" r="19" fill="#3e7dff"/><rect x="13" y="16" width="12" height="6" rx="2" fill="#fff"/></svg>
+        <svg width="60" height="60" viewBox="0 0 38 38" fill="none"><circle cx="19" cy="19" r="19" fill="#3e7dff"/><rect x="13" y="16" width="12" height="6" rx="2" fill="#fff"/></svg>
       );
     case "wallet":
       return (
-        <svg width="38" height="38" viewBox="0 0 38 38" fill="none"><circle cx="19" cy="19" r="19" fill="#3e7dff"/><rect x="12" y="15" width="14" height="8" rx="2" fill="#fff"/></svg>
+        <svg width="60" height="60" viewBox="0 0 38 38" fill="none"><circle cx="19" cy="19" r="19" fill="#3e7dff"/><rect x="12" y="15" width="14" height="8" rx="2" fill="#fff"/></svg>
       );
     case "target":
       return (
-        <svg width="38" height="38" viewBox="0 0 38 38" fill="none"><circle cx="19" cy="19" r="19" fill="#3e7dff"/><circle cx="19" cy="19" r="5" fill="#fff"/></svg>
+        <svg width="60" height="60" viewBox="0 0 38 38" fill="none"><circle cx="19" cy="19" r="19" fill="#3e7dff"/><circle cx="19" cy="19" r="5" fill="#fff"/></svg>
       );
     default:
       return null;
