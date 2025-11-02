@@ -1,0 +1,94 @@
+.features-section {
+  width: 100%;
+  padding: 4rem 0 2rem 0;
+  background: none;
+  text-align: center;
+}
+
+.features-header {
+  margin-bottom: 2.3rem;
+}
+
+.features-title {
+  font-size: 2.3rem;
+  font-weight: 800;
+  margin-bottom: .8rem;
+  transition: color 0.3s;
+}
+
+.features-desc {
+  font-size: 1.07rem;
+  transition: color 0.3s;
+  margin-bottom: 0;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3.1rem 3.7rem;
+  align-items: stretch;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 1150px;
+}
+
+.feature-card {
+  background: none;
+  border-radius: 16px;
+  text-align: center;
+  padding: 0.5rem 0.9rem 0 0.7rem;
+  transition: box-shadow 0.3s;
+}
+.feature-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.1rem;
+  transition: background 0.3s;
+}
+
+.feature-title {
+  font-size: 1.45rem;
+  font-weight: 700;
+  margin-bottom: .45rem;
+  transition: color 0.3s;
+}
+
+.feature-text {
+  font-size: 1.09rem;
+  line-height: 1.5;
+  margin-bottom: .3rem;
+  transition: color 0.3s;
+}
+
+
+body[data-theme="dark"] .features-section .features-title { color: #fff; }
+body[data-theme="light"] .features-section .features-title { color: #23283c; }
+body[data-theme="dark"] .features-section .features-desc { color: #c6c9e4; }
+body[data-theme="light"] .features-section .features-desc { color: #464967; }
+body[data-theme="dark"] .features-section .feature-title { color: #fff; }
+body[data-theme="light"] .features-section .feature-title { color: #23283c; }
+body[data-theme="dark"] .features-section .feature-text { color: #dbdbf3; }
+body[data-theme="light"] .features-section .feature-text { color: #464967; }
+/* END THEME OVERRIDES */
+
+@media (max-width: 900px) {
+  .features-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem 1rem;
+    max-width: 680px;
+  }
+}
+@media (max-width: 650px) {
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 2.4rem 1rem;
+    max-width: 370px;
+  }
+  .features-title {
+    font-size: 1.35rem !important;
+  }
+  .features-header {
+    margin-bottom: 1.1rem;
+  }
+}

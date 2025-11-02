@@ -4,9 +4,9 @@ interface HeroSectionProps {
   isDark: boolean;
 }
 
-const HeroSection: React.FC<HeroSectionProps> = ({ isDark }) => {
+const HeroSection: React.FC<HeroSectionProps> = () => {
   return (
-    <section className={`hero-section ${isDark ? "dark" : "light"}`}>
+    <section className="hero-section">
       <div className="hero-content">
         <h1 className="hero-title">
           Next.js Template and Boilerplate<br />for Crypto, ICO and Web3

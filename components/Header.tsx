@@ -30,7 +30,7 @@ const Header: React.FC<HeaderProps> = () => {
     <header
       style={{
         position: "fixed",
-        padding: "10px 0",
+        padding: "3px 0",
         top: 0,
         left: 0,
         width: "100%",
@@ -82,7 +82,7 @@ const Header: React.FC<HeaderProps> = () => {
           >
             e
           </span>
-          <span>Crypto</span>
+          <span><a href="/">Crypto</a></span>
         </div>
         {/* Desktop Nav */}
         <nav
@@ -228,7 +228,7 @@ const Header: React.FC<HeaderProps> = () => {
               marginLeft: "auto",
             }}
           >
-            Sign In
+            <a href="/login">Sign In</a>
           </button>
           {/* Mobile Nav Toggle */}
           <button

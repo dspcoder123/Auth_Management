@@ -82,18 +82,20 @@
 
 
 
-.hero-section.dark .hero-title {
+/* GLOBAL THEME SELECTORS BELOW */
+body[data-theme="dark"] .hero-title {
   color: #d84545;
 }
-.hero-section.light .hero-title {
+body[data-theme="light"] .hero-title {
   color: #23283c;
 }
-.hero-section.dark .hero-desc {
+body[data-theme="dark"] .hero-desc {
   color: #d7dbff;
 }
-.hero-section.light .hero-desc {
+body[data-theme="light"] .hero-desc {
   color: #22283c;
 }
+
 
 @media (max-width: 800px) {
   .hero-title {
