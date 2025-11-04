@@ -7,7 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import I18nProvider from '../components/I18nProvider';
 import PageTracker from '../components/PageTracker';
-import Header from '../components/Header';
+import Header from '../components/Header/Header';
 import Script from 'next/script';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

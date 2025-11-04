@@ -5,12 +5,7 @@ body[data-theme="dark"] {
 body[data-theme="light"] {
   background: #fff !important;
 }
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
+  
 
 body {
   color: var(--foreground);

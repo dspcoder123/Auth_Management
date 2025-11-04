@@ -1,0 +1,155 @@
+.container {
+    max-width: 1040px;
+    margin: 72px auto 0;
+    padding: 24px 32px;
+    font-family: "Inter", Arial, sans-serif;
+    color: #1e293b;
+    position: relative;
+  }
+  
+  /* Add Button */
+  .addButtonWrapper {
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+  }
+  
+  .addButton {
+    padding: 12px 20px;
+    border-radius: 10px;
+    background-color: #3e7dff;
+    color: white;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.18s ease-in-out;
+  }
+  
+  .addButton:hover {
+    background-color: #265dff;
+    box-shadow: 0 4px 12px rgba(62, 125, 255, 0.3);
+  }
+  
+  /* Dropdown list — clean, scroll-free, glass style */
+  .dropdownListNoScroll {
+    position: absolute;
+    top: 55px;
+    right: 0;
+    width: 260px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 14px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.08);
+    list-style: none;
+    z-index: 1000;
+    padding: 10px 0;
+    margin: 0;
+    overflow: hidden; /* no scroll */
+    transition: all 0.2s ease-in-out;
+    backdrop-filter: blur(10px); /* subtle glass effect */
+    animation: fadeSlide 0.18s ease-in-out;
+  }
+  
+  /* Dropdown item */
+  .dropdownItemStyled {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px;
+    font-size: 15.5px;
+    font-weight: 500;
+    color: #1e293b;
+    cursor: pointer;
+    border-radius: 10px;
+    margin: 2px 6px;
+    transition: all 0.18s ease-in-out;
+  }
+  
+  .dropdownItemStyled:hover {
+    background: #eef4ff;
+    color: #2563eb;
+    transform: translateX(2px);
+  }
+  
+  /* Empty message */
+  .dropdownEmpty {
+    padding: 14px 18px;
+    color: #64748b;
+    font-size: 15px;
+    text-align: left;
+    user-select: none;
+    opacity: 0.8;
+  }
+  
+  .widgetIcon {
+    font-size: 18px;
+    opacity: 0.9;
+  }
+  
+  /* Animation for dropdown */
+  @keyframes fadeSlide {
+    from {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Widget Grid & Cards */
+  .widgetGrid {
+    margin-top: 32px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  
+  .noWidgetsMessage {
+    font-size: 16px;
+    color: #64748b;
+  }
+  
+  .widgetCard {
+    background-color: #f8fbff;
+    border-radius: 14px;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    min-height: 140px;
+    justify-content: flex-start;
+    user-select: none;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .widgetCard:hover {
+    box-shadow: 0 4px 14px rgba(62, 125, 255, 0.15);
+    transform: translateY(-2px);
+  }
+  
+  .widgetTitle {
+    margin: 0 0 12px;
+    color: #3e7dff;
+    font-weight: 700;
+    font-size: 1.3rem;
+  }
+  
+  .widgetInput {
+    padding: 10px 14px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1.5px solid #cbd5e1;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.15s ease-in-out;
+  }
+  
+  .widgetInput:focus {
+    border-color: #3e7dff;
+    box-shadow: 0 0 0 2px rgba(62, 125, 255, 0.1);
+  }
+  
