@@ -9,6 +9,7 @@ import I18nProvider from '../components/I18nProvider';
 import PageTracker from '../components/PageTracker';
 import Header from '../components/Header/Header';
 import Script from 'next/script';
+import { Suspense } from 'react';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -38,7 +39,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <I18nProvider>
             <Header/>
             {children}
+            <Suspense fallback = {null}>
             <PageTracker />
+            </Suspense>
+            
           </I18nProvider>
           <ToastContainer position="top-right" autoClose={2500} hideProgressBar />
         </GoogleOAuthProvider>

@@ -9,7 +9,7 @@ export default function PageTracker() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { i18n } = useTranslation();
-
+  if (typeof window === 'undefined') return null;
   const trackPageView = (path: string, language: string) => {
     const pathWithLanguage = path.includes('?')
       ? `${path}&lang=${language}`
