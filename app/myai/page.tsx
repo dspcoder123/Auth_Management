@@ -5,7 +5,7 @@ import './myAI.css';
 import auth from '../../lib/auth'; // adjust path as per your structure
 
 const fetchMyAIWidgets = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/myai/visitNames`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/myai/visitNames`);
   const json = await res.json();
   return json.data || [];
 };
