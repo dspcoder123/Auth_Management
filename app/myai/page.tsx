@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import './myAI.css';
 import auth from '../../lib/auth'; // adjust path as per your structure
+import { useRouter } from 'next/navigation';
 
 const fetchMyAIWidgets = async () => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/myai/visitNames`);
@@ -11,6 +12,7 @@ const fetchMyAIWidgets = async () => {
 };
 
 const MyAIPage: React.FC = () => {
+  const router = useRouter();
   const [localUser, setLocalUser] = useState<any>(null);
   const [widgetList, setWidgetList] = useState<string[]>([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -20,7 +22,7 @@ const MyAIPage: React.FC = () => {
     const user = auth.getUser();
     setLocalUser(user);
     if (!user) {
-      window.location.href = '/login';
+      router.push('/login');
     } else {
       fetchMyAIWidgets().then(setWidgetList);
     }

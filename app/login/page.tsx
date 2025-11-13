@@ -29,7 +29,7 @@ export default function LoginForm() {
 
       // Store token and user
       if (res.data.token || res.data.user) auth.setAuth(res.data.token || null, res.data.user || null);
-      setTimeout(() => (window.location.href = '/'), 1000);
+      setTimeout(() => router.push('/'), 1000);
     } catch (err: any) {
       toast.error(err.response?.data?.toastMessage || "Login failed");
     } finally {

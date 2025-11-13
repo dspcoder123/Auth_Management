@@ -5,6 +5,8 @@ import auth from '../../lib/auth';
 import { useTranslation } from 'react-i18next';
 import { FiUser, FiChevronDown } from "react-icons/fi";
 import './Header.css';
+import { useRouter } from 'next/navigation';
+
 
 type StrapiHeaderItem = {
   id: number;
@@ -22,6 +24,8 @@ type StrapiHeaderItem = {
 type StrapiResponse<T> = { data: T[] };
 
 const Header: React.FC = () => {
+  const router = useRouter();
+
   const [isDark, setIsDark] = useState(true);
   useEffect(() => {
     document.body.setAttribute("data-theme", isDark ? "dark" : "light");
@@ -100,14 +104,16 @@ const Header: React.FC = () => {
   }, []);
 
   const handleDropdownToggle = () => setDropdownOpen((open) => !open);
-  const handleProfileNav = () => { setDropdownOpen(false); window.location.href = '/profile'; };
+  const handleProfileNav = () => { setDropdownOpen(false); router.push('/profile');
+  };
   const handleMouseEnter = () => setDropdownOpen(true);
   const handleMouseLeave = () => setDropdownOpen(false);
   const handleLogoutInternal = () => {
     try { auth.clearAuth(); } catch (e) { }
     setDropdownOpen(false);
     setLocalUser(null);
-    window.location.href = '/';
+    router.push('/');
+
   };
   const handleToggle = () => setIsDark((d) => !d);
 
@@ -176,7 +182,7 @@ const Header: React.FC = () => {
               </div>
             )}
             {localUser && (
-              <button className="myAIButton" onClick={() => window.location.href = '/myai'} aria-label="Open MyAI">
+              <button className="myAIButton" onClick={() => router.push('/myai')} aria-label="Open MyAI">
                 MyAI
               </button>
             )}

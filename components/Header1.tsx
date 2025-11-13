@@ -4,6 +4,8 @@ import { useEffect, useMemo, useState } from 'react';
 import auth from '../lib/auth';
 import { useTranslation } from 'react-i18next';
 import { FiLogOut, FiUser, FiChevronDown } from 'react-icons/fi';
+import { useRouter } from 'next/navigation';
+
 
 type StrapiHeaderItem = {
   id: number;
@@ -27,6 +29,7 @@ export default function Header({
   user?: any;
   onLogout?: () => void;
 }) {
+  const router = useRouter();
   const { i18n, t } = useTranslation('common');
   const currentLocale = (i18n.language as 'en' | 'hi') || 'en';
   const [headerItem, setHeaderItem] = useState<StrapiHeaderItem | null>(null);
@@ -118,7 +121,7 @@ export default function Header({
   const handleDropdownToggle = () => setDropdownOpen((open) => !open);
   const handleProfileNav = () => {
     setDropdownOpen(false);
-    window.location.href = '/profile';
+    router.push('/profile');
   };
 
   // Hover behavior for accessibility
@@ -133,7 +136,7 @@ export default function Header({
     if (onLogout) {
       try { onLogout(); } catch (e) { }
     } else {
-      window.location.href = '/';
+      router.push('/');
     }
   };
   return (

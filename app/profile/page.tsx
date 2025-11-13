@@ -5,15 +5,17 @@ import axios from 'axios';
 import auth from '../../lib/auth';
 import { FiUser } from 'react-icons/fi';
 import '../../styles/ProfilePage.css'; // You can create or extend your CSS here
+import { useRouter } from 'next/navigation';
 
 export default function ProfilePage() {
+  const router = useRouter();
   const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
     async function fetchProfile() {
       const token = localStorage.getItem('authToken');
       if (!token) {
-        window.location.href = '/';
+        router.push('/');
         return;
       }
       try {
@@ -23,7 +25,7 @@ export default function ProfilePage() {
         setUser(res.data.user);
       } catch {
         localStorage.removeItem('authToken');
-        window.location.href = '/';
+        router.push('/');
       }
     }
     fetchProfile();
@@ -33,7 +35,7 @@ export default function ProfilePage() {
 
   const handleLogout = () => {
     auth.clearAuth();
-    window.location.href = '/login';
+    router.push('/login');
   };
 
   return (

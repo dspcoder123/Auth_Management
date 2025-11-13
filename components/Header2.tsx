@@ -4,6 +4,8 @@ import React, { useState, useEffect, useMemo } from "react";
 import auth from '../lib/auth';
 import { useTranslation } from 'react-i18next';
 import { FiUser, FiChevronDown } from "react-icons/fi";
+import { useRouter } from 'next/navigation';
+
 
 // Type for your CMS header nav items in Strapi
 type StrapiHeaderItem = {
@@ -27,7 +29,7 @@ const Header: React.FC = () => {
   useEffect(() => {
     document.body.setAttribute("data-theme", isDark ? "dark" : "light");
   }, [isDark]);
-
+  const router = useRouter();
   // Scroll effect for header background
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
@@ -110,7 +112,7 @@ const Header: React.FC = () => {
   const handleDropdownToggle = () => setDropdownOpen((open) => !open);
   const handleProfileNav = () => {
     setDropdownOpen(false);
-    window.location.href = '/profile';
+    router.push('/profile');
   };
   const handleMouseEnter = () => setDropdownOpen(true);
   const handleMouseLeave = () => setDropdownOpen(false);
@@ -120,7 +122,7 @@ const Header: React.FC = () => {
     try { auth.clearAuth(); } catch (e) { }
     setDropdownOpen(false);
     setLocalUser(null);
-    window.location.href = '/';
+    router.push('/');
   };
 
   // Theme toggle
@@ -339,7 +341,7 @@ const Header: React.FC = () => {
                 fontSize: "1.13rem",
                 cursor: "pointer"
               }}
-              onClick={() => window.location.href = '/myai'}
+              onClick={() => router.push('/myai')}
               aria-label="Open MyAI"
             >
               MyAI

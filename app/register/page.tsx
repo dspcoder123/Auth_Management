@@ -4,8 +4,11 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { GoogleLogin } from '@react-oauth/google';
 import '../../styles/RegisterForm.css';
+import { useRouter } from 'next/navigation';
 
 export default function RegisterForm() {
+  const router = useRouter();
+
   const [form, setForm] = useState({ name: '', email: '', mobile: '', password: '' });
   const [loading, setLoading] = useState(false);
 
@@ -35,7 +38,7 @@ export default function RegisterForm() {
       });
       toast.success(res.data.toastMessage || 'Google registration successful!');
       setTimeout(() => {
-        window.location.href = '/';
+        router.push('/');
       }, 2000);
     } catch {
       toast.error('Google registration failed');
