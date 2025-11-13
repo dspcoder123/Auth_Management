@@ -1,4 +1,6 @@
 // Lightweight auth helper to centralize localStorage access and auth update events
+'use client';
+
 type AuthUser = any;
 
 const TOKEN_KEY = 'authToken';
@@ -41,6 +43,7 @@ export function clearAuth() {
 }
 
 export function dispatchAuthUpdate(detail: any) {
+  if (typeof window === 'undefined') return;
   try {
     window.dispatchEvent(new CustomEvent('auth:update', { detail }));
   } catch (e) {

@@ -33,10 +33,14 @@ const Header: React.FC = () => {
   // Scroll effect for header background
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
+    if (typeof window === 'undefined') return;  // Prevent running on server
+  
     const handleScroll = () => setScrolled(window.scrollY > 10);
+  
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  
 
   // Mobile menu toggle
   const [mobileOpen, setMobileOpen] = useState(false);

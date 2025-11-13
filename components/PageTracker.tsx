@@ -38,19 +38,21 @@ export default function PageTracker() {
   }, [pathname, searchParams, i18n.language]);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return; // guard for server side
+  
     const handleLanguageChange = (event: CustomEvent) => {
       const paramsString = searchParams?.toString() ?? '';
       const path = pathname + (paramsString ? `?${paramsString}` : '');
       const language = event.detail.language;
-
+  
       trackPageView(path, language);
     };
-
+  
     window.addEventListener('languageChanged', handleLanguageChange as EventListener);
     return () => {
       window.removeEventListener('languageChanged', handleLanguageChange as EventListener);
     };
   }, [pathname, searchParams]);
-
+  
   return null; // Component renders nothing
 }

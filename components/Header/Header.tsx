@@ -33,10 +33,14 @@ const Header: React.FC = () => {
 
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
+    if (typeof window === 'undefined') return;  // Prevent running on server
+  
     const handleScroll = () => setScrolled(window.scrollY > 10);
+  
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  
 
   const [mobileOpen, setMobileOpen] = useState(false);
   const { i18n, t } = useTranslation('common');
