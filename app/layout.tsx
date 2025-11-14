@@ -10,6 +10,7 @@ import PageTracker from '../components/PageTracker';
 import Header from '../components/Header/Header';
 import Script from 'next/script';
 import { Suspense } from 'react';
+import { Analytics } from "@vercel/analytics/next"
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <I18nProvider>
             <Header/>
             {children}
+            <Analytics />
             <Suspense fallback = {null}>
             <PageTracker />
             </Suspense>
