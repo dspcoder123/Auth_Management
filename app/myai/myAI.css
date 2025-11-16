@@ -46,7 +46,7 @@
     z-index: 1000;
     padding: 10px 0;
     margin: 0;
-    overflow: hidden; /* no scroll */
+    overflow: visible; /* no scroll */
     transition: all 0.2s ease-in-out;
     backdrop-filter: blur(10px); /* subtle glass effect */
     animation: fadeSlide 0.18s ease-in-out;
