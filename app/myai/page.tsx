@@ -232,7 +232,7 @@ const MyAIPage = () => {
                       fontWeight: "500"
                     }}
                   >
-                    Show Details
+                    Explore Me
                   </button>
                 </div>
               );
