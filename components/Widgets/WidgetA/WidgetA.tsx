@@ -57,7 +57,7 @@ const WidgetA: React.FC<WidgetAProps> = ({ userEmail }) => {
   useEffect(() => {
     async function fetchHistory() {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_LOCAL_URL}/api/myai/history?userEmail=${userEmail}`
+        `${process.env.NEXT_PUBLIC_LIVE_URL}/api/myai/history?userEmail=${userEmail}`
       );
       const data = await res.json();
       setHistory(Array.isArray(data.data) ? data.data.reverse() : []);
@@ -71,7 +71,7 @@ const WidgetA: React.FC<WidgetAProps> = ({ userEmail }) => {
   const refreshHistory = async () => {
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_LOCAL_URL}/api/myai/history?userEmail=${userEmail}`
+        `${process.env.NEXT_PUBLIC_LIVE_URL}/api/myai/history?userEmail=${userEmail}`
       );
       const data = await res.json();
       setHistory(Array.isArray(data.data) ? data.data.reverse() : []);
@@ -86,7 +86,7 @@ const WidgetA: React.FC<WidgetAProps> = ({ userEmail }) => {
     setSendingNewChat(true);
     try {
       await fetch(
-        `${process.env.NEXT_PUBLIC_LOCAL_URL}/api/add-job`,
+        `${process.env.NEXT_PUBLIC_LIVE_URL}/api/add-job`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -96,7 +96,7 @@ const WidgetA: React.FC<WidgetAProps> = ({ userEmail }) => {
       await refreshHistory();
       await new Promise(res => setTimeout(res, 3000));
       const hisRes = await fetch(
-        `${process.env.NEXT_PUBLIC_LOCAL_URL}/api/myai/history?userEmail=${userEmail}`
+        `${process.env.NEXT_PUBLIC_LIVE_URL}/api/myai/history?userEmail=${userEmail}`
       );
       const hisData = await hisRes.json();
       await new Promise(res => setTimeout(res, 1000));
@@ -116,7 +116,7 @@ const WidgetA: React.FC<WidgetAProps> = ({ userEmail }) => {
     if (!window.confirm('Delete this chat?')) return;
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_LOCAL_URL}/api/myai/history/${_id}?userEmail=${userEmail}`,
+        `${process.env.NEXT_PUBLIC_LIVE_URL}/api/myai/history/${_id}?userEmail=${userEmail}`,
         { method: 'DELETE' }
       );
       const data = await res.json();
@@ -135,7 +135,7 @@ const WidgetA: React.FC<WidgetAProps> = ({ userEmail }) => {
   const handleRenameChat = async (_id: string, idx: number) => {
     if (!editValue.trim()) return;
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/myai/history/rename`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_LIVE_URL}/api/myai/history/rename`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ historyId: _id, newQuery: editValue, userEmail })
