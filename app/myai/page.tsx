@@ -4,6 +4,15 @@ import React, { useEffect, useState } from 'react';
 import './myAI.css';
 import auth from '../../lib/auth';
 import { useRouter } from 'next/navigation';
+import WidgetA from '@/components/Widgets/WidgetA/WidgetA';
+import WidgetB from '@/components/Widgets/WidgetB';
+import WidgetC from '@/components/Widgets/WidgetC';
+
+const widgetComponents: { [key: string]: React.FC<{userEmail:string}> } = {
+  "Perplexity Search": WidgetA,
+  "Language Translator": WidgetB,
+  "GPT Search": WidgetC,
+};
 
 // Fetch all widgets with category
 const fetchMyAIWidgets = async () => {
@@ -12,14 +21,14 @@ const fetchMyAIWidgets = async () => {
   return Array.isArray(data) ? data : [];
 };
 
-const fetchUserWidgets = async (userEmail:any) => {
+const fetchUserWidgets = async (userEmail: any) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/widgets/userWidgets?userEmail=${encodeURIComponent(userEmail)}`);
   const data = await res.json();
   // BE returns [{widgetName, ...}] so extract names
   return Array.isArray(data) ? data.map(w => w.widgetName || w) : [];
 };
 
-const addUserWidget = async (userEmail :any, widgetName:any) => {
+const addUserWidget = async (userEmail: any, widgetName: any) => {
   await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/widgets/userWidgets`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -27,7 +36,7 @@ const addUserWidget = async (userEmail :any, widgetName:any) => {
   });
 };
 
-const removeUserWidget = async (userEmail:any, widgetName:any) => {
+const removeUserWidget = async (userEmail: any, widgetName: any) => {
   await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/widgets/userWidgets`, {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
@@ -42,6 +51,7 @@ const MyAIPage = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [menuIndex, setMenuIndex] = useState<number | null>(null);
   const [selectedWidgets, setSelectedWidgets] = useState<string[]>([]);
+  const [activeWidget, setActiveWidget] = useState<string | null>(null);
 
   // Load user, widgets, and user selections
   useEffect(() => {
@@ -82,115 +92,154 @@ const MyAIPage = () => {
 
   return (
     <div className="container">
-      <div className="addButtonWrapper">
-        <button
-          className="addButton"
-          onClick={() => setDropdownOpen((open) => !open)}
-          aria-expanded={dropdownOpen}
-          aria-haspopup="listbox"
-        >
-          + Add Widget
-        </button>
-
-        {dropdownOpen && (
-          <ul className="dropdownListNoScroll" role="listbox" tabIndex={-1}
-            onMouseLeave={() => setMenuIndex(null)}
-            style={{ display: 'flex', flexDirection: 'column', gap: 0, padding: 0 }}
+      {activeWidget ? (
+        <div style={{ minHeight: "60vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+          <button
+            onClick={() => setActiveWidget(null)}
+            style={{
+              marginBottom: 32,
+              background: "#f0f0f0",
+              border: "1px solid #aaa",
+              padding: "8px 24px",
+              borderRadius: "8px",
+              cursor: "pointer",
+              fontWeight: "500"
+            }}
           >
-            {/* Main categories */}
-            {categories.length === 0 && (
-              <li className="dropdownEmpty">No widgets available</li>
-            )}
-            {categories.map((cat, i) => (
-              <li
-                key={cat}
-                role="option"
-                tabIndex={0}
-                className="dropdownItemStyled"
-                style={{ position: "relative", minWidth: 140 }}
-                onMouseEnter={() => setMenuIndex(i)}
-                onClick={() => setMenuIndex(i)}
+            ← Back to Widgets
+          </button>
+          <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+            {widgetComponents[activeWidget] ? React.createElement(widgetComponents[activeWidget] , {userEmail :localUser.email}) : <div>Widget not found</div>}
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className="addButtonWrapper">
+            <button
+              className="addButton"
+              onClick={() => setDropdownOpen((open) => !open)}
+              aria-expanded={dropdownOpen}
+              aria-haspopup="listbox"
+            >
+              + Add Widget
+            </button>
+            {dropdownOpen && (
+              <ul className="dropdownListNoScroll" role="listbox" tabIndex={-1}
+                onMouseLeave={() => setMenuIndex(null)}
+                style={{ display: 'flex', flexDirection: 'column', gap: 0, padding: 0 }}
               >
-                <span className="widgetIcon">🟦</span>
-                <span>{cat}</span>
-                {menuIndex === i && (
-                  <ul
-                    className="dropdownListNoScroll"
+                {/* Main categories */}
+                {categories.length === 0 && (
+                  <li className="dropdownEmpty">No widgets available</li>
+                )}
+                {categories.map((cat, i) => (
+                  <li
+                    key={cat}
+                    role="option"
+                    tabIndex={0}
+                    className="dropdownItemStyled"
+                    style={{ position: "relative", minWidth: 140 }}
+                    onMouseEnter={() => setMenuIndex(i)}
+                    onClick={() => setMenuIndex(i)}
+                  >
+                    <span className="widgetIcon">🟦</span>
+                    <span>{cat}</span>
+                    {menuIndex === i && (
+                      <ul
+                        className="dropdownListNoScroll"
+                        style={{
+                          position: 'absolute',
+                          left: '240px',
+                          top: 0,
+                          width: 220,
+                          marginLeft: 4,
+                          background: 'rgba(255,255,255,0.96)',
+                          boxShadow: '0 4px 16px rgba(0,0,0,0.1)',
+                          padding: 0,
+                        }}
+                      >
+                        {widgetData[cat]
+                          .filter((w: any) => !selectedWidgets.includes(w.widgetName))
+                          .map((w: any) => (
+                            <li
+                              key={w.widgetName}
+                              className="dropdownItemStyled"
+                              style={{ minWidth: 180 }}
+                              onClick={async (e) => {
+                                e.stopPropagation();
+                                await handleAddWidget(w.widgetName);
+                                setDropdownOpen(false);
+                                setMenuIndex(null);
+                              }}
+                            >
+                              <span className="widgetIcon">🟢</span>
+                              <span>{w.widgetName}</span>
+                            </li>
+                          ))}
+                      </ul>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+          <div className="widgetGrid">
+            {selectedWidgets.length === 0 && (
+              <p className="noWidgetsMessage">
+                No widgets added yet. Click "Add Widget" to get started.
+              </p>
+            )}
+
+            {selectedWidgets.map((widget) => {
+              return (
+                <div key={widget} className="widgetCard" style={{ position: 'relative' }}>
+                  <button
+                    onClick={() => handleRemoveWidget(widget)}
                     style={{
                       position: 'absolute',
-                      left: '240px',
-                      top: 0,
-                      width: 220,
-                      marginLeft: 4,
-                      background: 'rgba(255,255,255,0.96)',
-                      boxShadow: '0 4px 16px rgba(0,0,0,0.1)',
+                      top: 10,
+                      right: 10,
+                      background: 'transparent',
+                      border: 'none',
+                      color: '#64748b',
+                      fontSize: 18,
+                      cursor: 'pointer',
                       padding: 0,
+                      zIndex: 2,
+                    }}
+                    aria-label="Remove widget"
+                    title="Remove widget"
+                  >
+                    &#x2715;
+                  </button>
+                  <h3 className="widgetTitle">{widget}</h3>
+                  <input
+                    type="text"
+                    placeholder={`Search ${widget}...`}
+                    className="widgetInput"
+                  />
+                  {/* Button to view only single widget area */}
+                  <button
+                    onClick={() => setActiveWidget(widget)}
+                    style={{
+                      width: "100%",
+                      marginTop: 8,
+                      background: "#f0f0f0",
+                      border: "1px solid #aaa",
+                      borderRadius: "6px",
+                      height: 32,
+                      cursor: "pointer",
+                      fontWeight: "500"
                     }}
                   >
-                    {widgetData[cat]
-                      .filter((w: any) => !selectedWidgets.includes(w.widgetName))
-                      .map((w: any) => (
-                        <li
-                          key={w.widgetName}
-                          className="dropdownItemStyled"
-                          style={{ minWidth: 180 }}
-                          onClick={async (e) => {
-                            e.stopPropagation();
-                            await handleAddWidget(w.widgetName);
-                            setDropdownOpen(false);
-                            setMenuIndex(null);
-                          }}
-                        >
-                          <span className="widgetIcon">🟢</span>
-                          <span>{w.widgetName}</span>
-                        </li>
-                      ))}
-                  </ul>
-                )}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-
-      <div className="widgetGrid">
-        {selectedWidgets.length === 0 && (
-          <p className="noWidgetsMessage">
-            No widgets added yet. Click "Add Widget" to get started.
-          </p>
-        )}
-
-        {selectedWidgets.map((widget) => (
-          <div key={widget} className="widgetCard" style={{ position: 'relative' }}>
-            {/* Delete button at the top right */}
-            <button
-              onClick={() => handleRemoveWidget(widget)}
-              style={{
-                position: 'absolute',
-                top: 10,
-                right: 10,
-                background: 'transparent',
-                border: 'none',
-                color: '#64748b',
-                fontSize: 18,
-                cursor: 'pointer',
-                padding: 0,
-                zIndex: 2
-              }}
-              aria-label="Remove widget"
-              title="Remove widget"
-            >
-              &#x2715;
-            </button>
-            <h3 className="widgetTitle">{widget}</h3>
-            <input
-              type="text"
-              placeholder={`Search ${widget}...`}
-              className="widgetInput"
-            />
+                    Explore Me
+                  </button>
+                </div>
+              );
+            })}
           </div>
-        ))}
-      </div>
+        </>
+      )}
     </div>
   );
 };
