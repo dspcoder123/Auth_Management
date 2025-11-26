@@ -1,0 +1,181 @@
+/* Make Google widget reuse WidgetA base layout/colors */
+.google-root {
+  background: #101935;
+}
+
+/* Sidebar override but keep WidgetA feel */
+.google-sidebar {
+  background: #181e36;
+  border-right: 1.5px solid #223057;
+}
+
+.google-sidebar-header {
+  border-bottom: 1px solid #223057;
+  color: #fff;
+  background: #181e36;
+}
+
+.google-newchat-btn {
+  background: #2d8cf0;
+  color: #fff;
+}
+.google-newchat-btn:hover {
+  background: #2563eb;
+}
+
+.google-sidebar-item {
+  color: #e4e4ef;
+}
+.google-sidebar-item.active {
+  background: #1e3779;
+  color: #fff;
+  border-color: #4adafa;
+}
+
+/* Status icons reuse WidgetA colors */
+.widgeta-status-green { color: #2dd4bf; font-size: 17px; }
+.widgeta-status-yellow { color: #f7ba1f; font-size: 13px; }
+.widgeta-status-email { color: #60a5fa; font-size: 16px; }
+
+/* Main panel same as WidgetA */
+.google-main {
+  background: #101935;
+}
+
+/* Search bar same style as WidgetA but text tweaked */
+.google-search-bar {
+  width: 100%;
+  max-width: 830px;
+  margin: 0 auto 24px;
+  padding: 0 32px;
+  display: flex;
+  gap: 13px;
+}
+
+.google-search-bar input {
+  flex: 1;
+  font-size: 21px;
+  padding: 17px 22px;
+  border-radius: 18px;
+  background: #1a2338;
+  color: #f6fbfc;
+  border: 2px solid #2c3656;
+  outline: none;
+  transition: border .18s;
+}
+.google-search-bar input:focus {
+  border-color: #38bdf8;
+}
+
+.google-search-bar button {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  padding: 0 34px;
+  font-weight: bold;
+  font-size: 21px;
+  cursor: pointer;
+  transition: background .15s;
+}
+.google-search-bar button:disabled {
+  background: #324a8a;
+  color: #d7d7ec;
+  cursor: not-allowed;
+}
+
+/* Results area */
+.google-results {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 36px 45px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 29px;
+  align-items: stretch;
+}
+
+.google-query-header {
+  color: #fff;
+  margin-bottom: 20px;
+  font-size: 1.46rem;
+  font-weight: 600;
+  letter-spacing: 0.1px;
+}
+
+/* Cards reuse WidgetA style but keep Google-ish link colors */
+.google-result-card {
+  border-radius: 14px;
+  background: #16213a;
+  padding: 23px 20px 21px 24px;
+  box-shadow: 0 1.5px 10px rgba(24,24,44,0.08);
+  min-width: 0;
+  margin-bottom: 3px;
+  width: 100%;
+}
+.google-title {
+  color: #3b82f6;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 9px;
+  word-break: break-word;
+  letter-spacing: 0.02em;
+}
+.google-title-link {
+  color: #3b82f6;
+  text-decoration: none;
+}
+.google-title-link:hover {
+  text-decoration: underline;
+}
+.google-link {
+  color: #60a5fa;
+  font-size: 13px;
+  margin-bottom: 6px;
+  word-break: break-all;
+}
+.google-snippet {
+  color: #e4e9ef;
+  margin-bottom: 11px;
+  font-size: 16px;
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+.google-empty {
+  color: #a3acc4;
+  text-align: center;
+  margin: 20px auto 0;
+  font-size: 18.5px;
+  letter-spacing: 0.05em;
+}
+
+.google-status-row {
+  color: #71e4d2;
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+/* Popup menu using WidgetA palette */
+.google-popup-menu {
+  background: #232e4c;
+  box-shadow: 0 2px 10px #0002;
+}
+.google-popup-menu button {
+  color: #fff;
+}
+.google-popup-menu button:hover {
+  background: #1e3779;
+}
+
+.google-menu-btn {
+  background: none;
+  border: none;
+  color: #a3acc4;
+  cursor: pointer;
+  font-size: 18px;
+  margin-left: 5px;
+  border-radius: 5px;
+  padding: 0 3px;
+}

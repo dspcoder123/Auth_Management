@@ -5,12 +5,12 @@ import './myAI.css';
 import auth from '../../lib/auth';
 import { useRouter } from 'next/navigation';
 import WidgetA from '@/components/Widgets/WidgetA/WidgetA';
-import WidgetB from '@/components/Widgets/WidgetB';
+import WidgetB from '@/components/Widgets/WidgetB/WidgetB';
 import WidgetC from '@/components/Widgets/WidgetC';
 
-const widgetComponents: { [key: string]: React.FC<{userEmail:string}> } = {
+const widgetComponents: { [key: string]: React.FC<{ userEmail: string; onBack: () => void }> } = {
   "Perplexity Search": WidgetA,
-  "Language Translator": WidgetB,
+  "Google Search": WidgetB,
   "GPT Search": WidgetC,
 };
 
@@ -24,7 +24,6 @@ const fetchMyAIWidgets = async () => {
 const fetchUserWidgets = async (userEmail: any) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/widgets/userWidgets?userEmail=${encodeURIComponent(userEmail)}`);
   const data = await res.json();
-  // BE returns [{widgetName, ...}] so extract names
   return Array.isArray(data) ? data.map(w => w.widgetName || w) : [];
 };
 
@@ -53,7 +52,6 @@ const MyAIPage = () => {
   const [selectedWidgets, setSelectedWidgets] = useState<string[]>([]);
   const [activeWidget, setActiveWidget] = useState<string | null>(null);
 
-  // Load user, widgets, and user selections
   useEffect(() => {
     const user = auth.getUser();
     setLocalUser(user);
@@ -61,7 +59,6 @@ const MyAIPage = () => {
       router.push('/login');
     } else {
       fetchMyAIWidgets().then((data) => {
-        // Group widgets by visitCategory
         const grouped = data.reduce((acc: any, widget: any) => {
           if (!acc[widget.visitCategory]) acc[widget.visitCategory] = [];
           acc[widget.visitCategory].push(widget);
@@ -69,7 +66,6 @@ const MyAIPage = () => {
         }, {});
         setWidgetData(grouped);
       });
-      // fetch user widgets
       fetchUserWidgets(user.email).then(setSelectedWidgets);
     }
   }, []);
@@ -78,16 +74,18 @@ const MyAIPage = () => {
 
   const categories = Object.keys(widgetData);
 
-  // Add widget (persistent)
   const handleAddWidget = async (widgetLabel: string) => {
     setSelectedWidgets((prev) => [...prev, widgetLabel]);
     await addUserWidget(localUser.email, widgetLabel);
   };
 
-  // Remove widget (persistent)
   const handleRemoveWidget = async (widgetLabel: string) => {
     setSelectedWidgets((prev) => prev.filter((w) => w !== widgetLabel));
     await removeUserWidget(localUser.email, widgetLabel);
+  };
+
+  const handleBack = () => {
+    setActiveWidget(null);
   };
 
   return (
@@ -95,7 +93,7 @@ const MyAIPage = () => {
       {activeWidget ? (
         <div style={{ minHeight: "60vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
           <button
-            onClick={() => setActiveWidget(null)}
+            onClick={handleBack}
             style={{
               marginBottom: 32,
               background: "#f0f0f0",
@@ -109,7 +107,7 @@ const MyAIPage = () => {
             ← Back to Widgets
           </button>
           <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
-            {widgetComponents[activeWidget] ? React.createElement(widgetComponents[activeWidget] , {userEmail :localUser.email}) : <div>Widget not found</div>}
+            {widgetComponents[activeWidget] ? React.createElement(widgetComponents[activeWidget], { userEmail: localUser.email, onBack: handleBack }) : <div>Widget not found</div>}
           </div>
         </div>
       ) : (
@@ -128,7 +126,6 @@ const MyAIPage = () => {
                 onMouseLeave={() => setMenuIndex(null)}
                 style={{ display: 'flex', flexDirection: 'column', gap: 0, padding: 0 }}
               >
-                {/* Main categories */}
                 {categories.length === 0 && (
                   <li className="dropdownEmpty">No widgets available</li>
                 )}
@@ -189,54 +186,50 @@ const MyAIPage = () => {
                 No widgets added yet. Click "Add Widget" to get started.
               </p>
             )}
-
-            {selectedWidgets.map((widget) => {
-              return (
-                <div key={widget} className="widgetCard" style={{ position: 'relative' }}>
-                  <button
-                    onClick={() => handleRemoveWidget(widget)}
-                    style={{
-                      position: 'absolute',
-                      top: 10,
-                      right: 10,
-                      background: 'transparent',
-                      border: 'none',
-                      color: '#64748b',
-                      fontSize: 18,
-                      cursor: 'pointer',
-                      padding: 0,
-                      zIndex: 2,
-                    }}
-                    aria-label="Remove widget"
-                    title="Remove widget"
-                  >
-                    &#x2715;
-                  </button>
-                  <h3 className="widgetTitle">{widget}</h3>
-                  <input
-                    type="text"
-                    placeholder={`Search ${widget}...`}
-                    className="widgetInput"
-                  />
-                  {/* Button to view only single widget area */}
-                  <button
-                    onClick={() => setActiveWidget(widget)}
-                    style={{
-                      width: "100%",
-                      marginTop: 8,
-                      background: "#f0f0f0",
-                      border: "1px solid #aaa",
-                      borderRadius: "6px",
-                      height: 32,
-                      cursor: "pointer",
-                      fontWeight: "500"
-                    }}
-                  >
-                    Explore Me
-                  </button>
-                </div>
-              );
-            })}
+            {selectedWidgets.map((widget) => (
+              <div key={widget} className="widgetCard" style={{ position: 'relative' }}>
+                <button
+                  onClick={() => handleRemoveWidget(widget)}
+                  style={{
+                    position: 'absolute',
+                    top: 10,
+                    right: 10,
+                    background: 'transparent',
+                    border: 'none',
+                    color: '#64748b',
+                    fontSize: 18,
+                    cursor: 'pointer',
+                    padding: 0,
+                    zIndex: 2,
+                  }}
+                  aria-label="Remove widget"
+                  title="Remove widget"
+                >
+                  &#x2715;
+                </button>
+                <h3 className="widgetTitle">{widget}</h3>
+                <input
+                  type="text"
+                  placeholder={`Search ${widget}...`}
+                  className="widgetInput"
+                />
+                <button
+                  onClick={() => setActiveWidget(widget)}
+                  style={{
+                    width: "100%",
+                    marginTop: 8,
+                    background: "#f0f0f0",
+                    border: "1px solid #aaa",
+                    borderRadius: "6px",
+                    height: 32,
+                    cursor: "pointer",
+                    fontWeight: "500"
+                  }}
+                >
+                  Explore Me
+                </button>
+              </div>
+            ))}
           </div>
         </>
       )}

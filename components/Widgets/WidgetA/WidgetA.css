@@ -53,6 +53,9 @@
   padding: 13px 13px 7px 13px;
 }
 .widgeta-sidebar-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* keep menu button at right */
   padding: 14px 16px 11px 13px;
   margin-bottom: 7px;
   background: transparent;
@@ -63,12 +66,26 @@
   font-size: 17px;
   cursor: pointer;
   transition: background .17s, border .21s;
-  display: flex;
-  align-items: center;
   gap: 13px;
-  /* overflow: hidden; */
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  /* Remove text-overflow, white-space for wrapping */
+  word-break: break-word;
+  white-space: normal;
+}
+
+/* Wrap text container flexibly */
+.widgeta-sidebar-item > span {
+  flex: 1 1 auto; /* allow wrapping and shrinking */
+  min-width: 0; /* prevent overflow */
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+/* Keep the menu button fixed size */
+.widgeta-menu-btn {
+  flex-shrink: 0;
+  margin-left: 5px;
 }
 .widgeta-sidebar-item.active {
   background: #1e3779;
