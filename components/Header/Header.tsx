@@ -145,7 +145,7 @@ const Header: React.FC = () => {
             <a href="#" className="headerNavLink">{aboutLabel}</a>
             <a href="#" className="headerNavLink">{servicesLabel}</a>
             <a href="#" className="headerNavLink">{portfolioLabel}</a>
-            <a href="#" className="headerNavLink">{blogLabel}</a>
+            <a href="/news" className="headerNavLink">{blogLabel}</a>
             <a href="#" className="headerNavLink">{contactLabel}</a>
           </nav>
           <div className="headerActions">
@@ -186,9 +186,22 @@ const Header: React.FC = () => {
               </div>
             )}
             {localUser && (
-              <button className="myAIButton" onClick={() => router.push('/myai')} aria-label="Open MyAI">
-                MyAI
-              </button>
+              <>
+                <button
+                  className="myAIButton"
+                  onClick={() => router.push('/myai')}
+                  aria-label="Open MyAI"
+                >
+                  MyAI
+                </button>
+                <button
+                  className="myAIButton"
+                  onClick={() => router.push('/conversion')}
+                  aria-label="Open Conversion"
+                >
+                  Conversion
+                </button>
+              </>
             )}
           </div>
         </div>
