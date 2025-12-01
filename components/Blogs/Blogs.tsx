@@ -2,11 +2,6 @@
 import React, { useEffect, useState } from "react";
 import "./Blogs.css";
 
-interface QuickAction {
-  title: string;
-  description: string;
-}
-
 interface NewsItem {
   _id: string;
   title: string;
@@ -15,9 +10,8 @@ interface NewsItem {
   url: string;
   urlToImage: string;
   publishedAt: string;
-  impactDescription : string;
-  quickActions : string;
-  
+  impactDescription: string;
+  quickActions: string;
 }
 
 const NewsPage: React.FC = () => {
@@ -37,7 +31,7 @@ const NewsPage: React.FC = () => {
   }, []);
 
   const toggleExpand = (id: string) => {
-    setExpandedId(expandedId === id ? null : id);
+    setExpandedId((prev) => (prev === id ? null : id));
   };
 
   return (
@@ -46,7 +40,8 @@ const NewsPage: React.FC = () => {
         <span className="news-badge">Latest News</span>
         <h1 className="news-heading">Recent News Highlights</h1>
         <p className="news-subtitle">
-          Curated headlines with quick-impact summaries and actions tailored for you.
+          Curated headlines with quick-impact summaries and actions tailored for
+          you.
         </p>
       </div>
 
@@ -55,11 +50,15 @@ const NewsPage: React.FC = () => {
       ) : (
         <div className="news-grid">
           {news.map((item) => {
-
             const isExpanded = expandedId === item._id;
 
             return (
-              <article key={item._id} className="news-card">
+              <article
+                key={item._id}
+                className={`news-card ${
+                  isExpanded ? "news-card--expanded" : ""
+                }`}
+              >
                 <div className="news-image-wrapper">
                   <img
                     className="news-image"
@@ -93,24 +92,40 @@ const NewsPage: React.FC = () => {
                     </button>
                   </div>
 
-                  {isExpanded && (
+                  {/* Insight section with smooth expand */}
+                  <div
+                    className={`ai-text-container ${
+                      isExpanded ? "ai-text-container--open" : ""
+                    }`}
+                  >
                     <div className="ai-text-section">
                       <div className="impact-description">
-                        <h3>Impact Analysis</h3>
+                        <h3>Impact analysis</h3>
                         <p>
-                          {item.impactDescription||
+                          {item.impactDescription ||
                             "No impact description available."}
-                        </p>
-                        <h3>Quick Actions</h3>
-                        <p>
-                          {item.quickActions||
-                            "No quick actions available."}
                         </p>
                       </div>
 
-                     
+                      <div className="quick-actions">
+                        <h3>Quick actions</h3>
+                        <p>
+                          {item.quickActions || "No quick actions available."}
+                        </p>
+                      </div>
                     </div>
-                  )}
+                  </div>
+
+                  {/* Bottom action bar */}
+                  <div className="news-actions-bar">
+                    <button className="news-action-btn">👍 Like</button>
+                    <button className="news-action-btn">👎 Dislike</button>
+                    <button className="news-action-btn">🔗 Share</button>
+                    <button className="news-action-btn">🔔 Subscribe</button>
+                    <button className="news-action-btn news-action-btn--primary">
+                      🧠 Ask expert
+                    </button>
+                  </div>
                 </div>
               </article>
             );
