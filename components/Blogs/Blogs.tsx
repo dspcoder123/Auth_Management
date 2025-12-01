@@ -15,7 +15,9 @@ interface NewsItem {
   url: string;
   urlToImage: string;
   publishedAt: string;
-  aiText: string;
+  impactDescription : string;
+  quickActions : string;
+  
 }
 
 const NewsPage: React.FC = () => {
@@ -94,10 +96,15 @@ const NewsPage: React.FC = () => {
                   {isExpanded && (
                     <div className="ai-text-section">
                       <div className="impact-description">
-                        <h3>Impact and Quick Actions</h3>
+                        <h3>Impact Analysis</h3>
                         <p>
-                          {item.aiText||
+                          {item.impactDescription||
                             "No impact description available."}
+                        </p>
+                        <h3>Quick Actions</h3>
+                        <p>
+                          {item.quickActions||
+                            "No quick actions available."}
                         </p>
                       </div>
 
