@@ -128,7 +128,7 @@ const Header: React.FC = () => {
   const servicesLabel = headerItem?.Services || 'Services';
   const portfolioLabel = headerItem?.Portfolio || 'Portfolio';
   const blogLabel = headerItem?.Blog || 'Blog';
-  const contactLabel = headerItem?.Contact || 'Contact';
+  const contactLabel = headerItem?.Contact || 'Tools';
 
   return (
     <header className={`mainHeader${isDark ? ' headerDark' : ' headerLight'}${scrolled ? ' headerScrolled' : ''}`}>
@@ -146,7 +146,7 @@ const Header: React.FC = () => {
             <a href="#" className="headerNavLink">{servicesLabel}</a>
             <a href="#" className="headerNavLink">{portfolioLabel}</a>
             <a href="/news" className="headerNavLink">{blogLabel}</a>
-            <a href="#" className="headerNavLink">{contactLabel}</a>
+            <a href="/tools" className="headerNavLink">{contactLabel}</a>
           </nav>
           <div className="headerActions">
             <select
