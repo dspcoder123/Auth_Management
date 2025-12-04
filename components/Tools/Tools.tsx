@@ -3,6 +3,7 @@ import "./Tools.css";
 import ExplicitChecker from "../ExplicitChecker/Explicit";
 import GdprChecker from "../GdprChecker/Gdpr";
 import DeepFakeChecker from "../DeepFakeChecker/DeepFake";
+import ImageSearch from "../ImageSearch/ImageSearch";
 
 
 
@@ -62,6 +63,9 @@ const ToolsPage: React.FC = () => {
 
   if (activeTool === "deepfake") {
     return <DeepFakeChecker onBack={() => setActiveTool(null)} />;
+  }
+  if (activeTool === "reverse-image") {
+    return <ImageSearch onBack={() => setActiveTool(null)} />;
   }
   // Later you can add other tools:
   // if (activeTool === "gdpr") return <GdprTool onBack={() => setActiveTool(null)} />;
