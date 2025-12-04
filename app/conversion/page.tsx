@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import "./Conversion.css";
+import Transcript from "../../components/Transcript/Transcript";
 
 type TopMenu = "Audio" | "Video" | "Image" | "Text" | string;
 
@@ -22,6 +23,13 @@ interface SubMenusResponse {
   data: SubMenuItem[];
 }
 
+type ActiveTool =
+  | null
+  | {
+      menu: TopMenu;
+      subKey: string;
+    };
+
 const menuDescriptions: Record<string, string> = {
   Audio: "Convert between text, audio formats, and speech-based assets.",
   Video: "Handle video transformations like clipping, resizing, and format changes.",
@@ -31,7 +39,6 @@ const menuDescriptions: Record<string, string> = {
 
 const getSubMenuEndpoint = (menu: TopMenu) => {
   const key = menu.toLowerCase();
-  // For Audio, Video, Image, Text we follow the pattern /api/{key}/menus
   return `http://localhost:4000/api/${key}/menus`;
 };
 
@@ -44,6 +51,8 @@ const ConversionPage: React.FC = () => {
   const [subMenus, setSubMenus] = useState<SubMenuItem[]>([]);
   const [subMenusLoading, setSubMenusLoading] = useState(false);
   const [subMenusError, setSubMenusError] = useState<string | null>(null);
+
+  const [activeTool, setActiveTool] = useState<ActiveTool>(null);
 
   useEffect(() => {
     const fetchMenus = async () => {
@@ -62,7 +71,6 @@ const ConversionPage: React.FC = () => {
   }, []);
 
   const handleViewMenu = async (menu: TopMenu) => {
-    // If the user clicks the same menu again, close it (toggle behavior)
     if (selectedMenu === menu) {
       setSelectedMenu(null);
       setSubMenus([]);
@@ -88,6 +96,15 @@ const ConversionPage: React.FC = () => {
     }
   };
 
+  // When Audio → Audio-Text tool is active, render it full-page
+  if (activeTool && activeTool.menu === "Audio" && activeTool.subKey === "audio-text") {
+    return (
+      <main className="conversion-page">
+        <Transcript onBack={() => setActiveTool(null)} />
+      </main>
+    );
+  }
+
   return (
     <main className="conversion-page">
       <h1 className="conversion-title">Conversion Area</h1>
@@ -95,7 +112,6 @@ const ConversionPage: React.FC = () => {
         Choose a conversion type below to explore the available tools and flows.
       </p>
 
-      {/* Top-level menus as cards */}
       {menusLoading ? (
         <p className="conversion-status">Loading menus...</p>
       ) : menusError ? (
@@ -129,29 +145,49 @@ const ConversionPage: React.FC = () => {
         </section>
       )}
 
-      {/* Submenus section */}
-      {selectedMenu && (
-        <section className="conversion-submenu-panel">
-          <h2 className="conversion-submenu-title">{selectedMenu} submenus</h2>
-          {subMenusLoading ? (
-            <p className="conversion-status">Loading options...</p>
-          ) : subMenusError ? (
-            <p className="conversion-status conversion-status--error">{subMenusError}</p>
-          ) : subMenus.length === 0 ? (
-            <p className="conversion-status">No submenu options available yet.</p>
-          ) : (
-            <ul className="conversion-submenu-list">
-              {subMenus.map((item) => (
-                <li
-                  key={item.key}
-                  className="conversion-submenu-item"
-                >
-                  {item.label}
+{selectedMenu && (
+      <section className="conversion-submenu-panel">
+        <h2 className="conversion-submenu-title">{selectedMenu} submenus</h2>
+        {subMenusLoading ? (
+          <p className="conversion-status">Loading options...</p>
+        ) : subMenusError ? (
+          <p className="conversion-status conversion-status--error">
+            {subMenusError}
+          </p>
+        ) : subMenus.length === 0 ? (
+          <p className="conversion-status">No submenu options available yet.</p>
+        ) : (
+          <ul className="conversion-submenu-list">
+            {subMenus.map((item) => {
+              const keyLower = item.key.toLowerCase();
+              const isAudioText =
+                selectedMenu === "Audio" && keyLower === "text";
+
+              const handleClick = () => {
+                if (isAudioText) {
+                  setActiveTool({ menu: "Audio", subKey: "audio-text" });
+                }
+              };
+
+              return (
+                <li key={item.key} className="conversion-submenu-item">
+                  <button
+                    type="button"
+                    className={
+                      isAudioText
+                        ? "conversion-submenu-button conversion-submenu-button--primary"
+                        : "conversion-submenu-button"
+                    }
+                    onClick={isAudioText ? handleClick : undefined}
+                  >
+                    {item.label}
+                  </button>
                 </li>
-              ))}
-            </ul>
-          )}
-        </section>
+              );
+            })}
+          </ul>
+        )}
+      </section>
       )}
     </main>
   );
