@@ -2,16 +2,17 @@ import React, { useState } from "react";
 import "./Tools.css";
 import ExplicitChecker from "../ExplicitChecker/Explicit";
 import GdprChecker from "../GdprChecker/Gdpr";
+import DeepFakeChecker from "../DeepFakeChecker/DeepFake";
 
 
 
 
-type ToolId = "sightengine" | "gdpr" | "copyleaks" | "reverse-image";
+type ToolId = "sightengine" | "gdpr" | "copyleaks" | "reverse-image" | "deepfake";
 
 const tools = [
   {
     id: "sightengine" as const,
-    title: "Deepfake & Explicit Check",
+    title: "Explicit Content Check",
     subtitle: "Sightengine",
     description:
       "Detect deepfakes, nudity, and explicit content in images and videos.",
@@ -38,6 +39,13 @@ const tools = [
     description: "Search for similar images to find potential IP violations.",
     imageAlt: "Reverse image search illustration",
   },
+  {
+    id: "deepfake" as const,
+    title: "Deepfake Check",
+    subtitle: "Deepfake Check",
+    description: "Check for deepfakes in images and videos.",
+    imageAlt: "Deepfake check illustration",
+  },
 ];
 
 const ToolsPage: React.FC = () => {
@@ -52,6 +60,9 @@ const ToolsPage: React.FC = () => {
     return <GdprChecker onBack={() => setActiveTool(null)} />;
   }
 
+  if (activeTool === "deepfake") {
+    return <DeepFakeChecker onBack={() => setActiveTool(null)} />;
+  }
   // Later you can add other tools:
   // if (activeTool === "gdpr") return <GdprTool onBack={() => setActiveTool(null)} />;
 
