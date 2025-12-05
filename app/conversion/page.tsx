@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import "./Conversion.css";
 import Transcript from "../../components/Transcript/Transcript";
+import ImageGen from "../../components/ImageGen/ImageGen";
 
 type TopMenu = "Audio" | "Video" | "Image" | "Text" | string;
 
@@ -26,9 +27,9 @@ interface SubMenusResponse {
 type ActiveTool =
   | null
   | {
-      menu: TopMenu;
-      subKey: string;
-    };
+    menu: TopMenu;
+    subKey: string;
+  };
 
 const menuDescriptions: Record<string, string> = {
   Audio: "Convert between text, audio formats, and speech-based assets.",
@@ -105,6 +106,15 @@ const ConversionPage: React.FC = () => {
     );
   }
 
+  // ✅ FIXED: When Text → Text-Image tool is active, render it full-page with onBack
+  if (activeTool && activeTool.menu === "Text" && activeTool.subKey === "text-image") {
+    return (
+      <main className="conversion-page">
+        <ImageGen onBack={() => setActiveTool(null)} />
+      </main>
+    );
+  }
+
   return (
     <main className="conversion-page">
       <h1 className="conversion-title">Conversion Area</h1>
@@ -145,49 +155,55 @@ const ConversionPage: React.FC = () => {
         </section>
       )}
 
-{selectedMenu && (
-      <section className="conversion-submenu-panel">
-        <h2 className="conversion-submenu-title">{selectedMenu} submenus</h2>
-        {subMenusLoading ? (
-          <p className="conversion-status">Loading options...</p>
-        ) : subMenusError ? (
-          <p className="conversion-status conversion-status--error">
-            {subMenusError}
-          </p>
-        ) : subMenus.length === 0 ? (
-          <p className="conversion-status">No submenu options available yet.</p>
-        ) : (
-          <ul className="conversion-submenu-list">
-            {subMenus.map((item) => {
-              const keyLower = item.key.toLowerCase();
-              const isAudioText =
-                selectedMenu === "Audio" && keyLower === "text";
+      {selectedMenu && (
+        <section className="conversion-submenu-panel">
+          <h2 className="conversion-submenu-title">{selectedMenu} submenus</h2>
+          {subMenusLoading ? (
+            <p className="conversion-status">Loading options...</p>
+          ) : subMenusError ? (
+            <p className="conversion-status conversion-status--error">
+              {subMenusError}
+            </p>
+          ) : subMenus.length === 0 ? (
+            <p className="conversion-status">No submenu options available yet.</p>
+          ) : (
+            <ul className="conversion-submenu-list">
+              {subMenus.map((item) => {
+                const keyLower = item.key.toLowerCase();
+                
+                // ✅ FIXED: Added check for text-image
+                const isAudioText = selectedMenu === "Audio" && keyLower === "text";
+                const isTextImage = selectedMenu === "Text" && keyLower === "image";
 
-              const handleClick = () => {
-                if (isAudioText) {
-                  setActiveTool({ menu: "Audio", subKey: "audio-text" });
-                }
-              };
+                const handleClick = () => {
+                  if (isAudioText) {
+                    setActiveTool({ menu: "Audio", subKey: "audio-text" });
+                  } else if (isTextImage) {
+                    setActiveTool({ menu: "Text", subKey: "text-image" });
+                  }
+                };
 
-              return (
-                <li key={item.key} className="conversion-submenu-item">
-                  <button
-                    type="button"
-                    className={
-                      isAudioText
-                        ? "conversion-submenu-button conversion-submenu-button--primary"
-                        : "conversion-submenu-button"
-                    }
-                    onClick={isAudioText ? handleClick : undefined}
-                  >
-                    {item.label}
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-        )}
-      </section>
+                const isClickable = isAudioText || isTextImage;
+
+                return (
+                  <li key={item.key} className="conversion-submenu-item">
+                    <button
+                      type="button"
+                      className={
+                        isClickable
+                          ? "conversion-submenu-button conversion-submenu-button--primary"
+                          : "conversion-submenu-button"
+                      }
+                      onClick={isClickable ? handleClick : undefined}
+                    >
+                      {item.label}
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </section>
       )}
     </main>
   );
