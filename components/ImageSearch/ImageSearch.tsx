@@ -61,7 +61,7 @@ const ImageSearchTool: React.FC<Props> = ({ onBack }) => {
       }
 
       const base =
-        process.env.REACT_APP_API_BASE_URL || "http://localhost:4000";
+        process.env.REACT_APP_API_BASE_URL || "${process.env.NEXT_PUBLIC_BACKEND_URL}";
 
       setLoading(true);
       const res = await axios.post<ApiResponse>(

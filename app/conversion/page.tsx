@@ -40,7 +40,7 @@ const menuDescriptions: Record<string, string> = {
 
 const getSubMenuEndpoint = (menu: TopMenu) => {
   const key = menu.toLowerCase();
-  return `http://localhost:4000/api/${key}/menus`;
+  return `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/${key}/menus`;
 };
 
 const ConversionPage: React.FC = () => {
@@ -58,7 +58,7 @@ const ConversionPage: React.FC = () => {
   useEffect(() => {
     const fetchMenus = async () => {
       try {
-        const res = await fetch("http://localhost:4000/api/menus");
+        const res = await fetch("${process.env.NEXT_PUBLIC_BACKEND_URL}/api/menus");
         const json: MenusResponse = await res.json();
         if (!json.success) throw new Error("Failed to load menus");
         setMenus(json.data || []);

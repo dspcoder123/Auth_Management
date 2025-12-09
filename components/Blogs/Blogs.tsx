@@ -20,7 +20,7 @@ const NewsPage: React.FC = () => {
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch("http://localhost:4000/api/news")
+    fetch("${process.env.NEXT_PUBLIC_BACKEND_URL}/api/news")
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {

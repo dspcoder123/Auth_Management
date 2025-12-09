@@ -66,7 +66,7 @@ const ExplicitChecker: React.FC<Props> = ({ onBack }) => {
         const form = new FormData();
         form.append("image", file as Blob); // backend field name = image
         res = await axios.post(
-          `${process.env.REACT_APP_API_BASE_URL || "http://localhost:4000"}/api/safety/analyze`,
+          `${process.env.REACT_APP_API_BASE_URL || "${process.env.NEXT_PUBLIC_BACKEND_URL}"}/api/safety/analyze`,
           form,
           {
             headers: { "Content-Type": "multipart/form-data" },
@@ -74,7 +74,7 @@ const ExplicitChecker: React.FC<Props> = ({ onBack }) => {
         );
       } else {
         res = await axios.post(
-          `${process.env.REACT_APP_API_BASE_URL || "http://localhost:4000"}/api/safety/analyze`,
+          `${process.env.REACT_APP_API_BASE_URL || "${process.env.NEXT_PUBLIC_BACKEND_URL}"}/api/safety/analyze`,
           { url }
         );
       }

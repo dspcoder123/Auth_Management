@@ -48,7 +48,7 @@ const GdprChecker: React.FC<Props> = ({ onBack }) => {
       setResult(null);
 
       const base =
-        process.env.REACT_APP_API_BASE_URL || "http://localhost:4000";
+        process.env.REACT_APP_API_BASE_URL || "${process.env.NEXT_PUBLIC_BACKEND_URL}";
 
       const res = await axios.post<GdprResult>(`${base}/api/gdpr/scan`, {
         url: trimmed,
